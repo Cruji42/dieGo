@@ -1,0 +1,37 @@
+<div class="login_content">
+    <mat-card class="card_login" >
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <form >
+                <p>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Correo Electronico</mat-label>
+                        <input type="email" matInput>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                      <input type="password" matInput>
+                    </mat-form-field>
+                  </p>
+                
+                <div class="button">
+                    <button  type="submit" mat-button>Iniciar sesión</button>
+                </div>
+            </form>
+            <hr>
+
+            <p>
+                <a class="button_forget" (click)="openDialog()">¿Olvidaste tu contraseña?</a>
+            </p>
+
+
+            <div class="button_register">
+                <button  mat-button>¿No tienes cuenta?</button>
+            </div>
+            
+        </mat-card-content>
+    </mat-card>
+</div>
+

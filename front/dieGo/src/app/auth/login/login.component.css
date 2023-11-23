@@ -1,0 +1,65 @@
+.login_content{
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+background: linear-gradient(to right, #FF7100, #FFEBA3);
+
+}
+
+mat-card-title{
+    color: #FF7100;
+}
+ .card_login{
+    margin-top: 10vh;
+    width: 40vw;
+    height: 80vh;
+    text-align: center;
+    background: #FFFFFF;
+ }
+
+ mat-form-field{
+    text-align: center;
+    width: 90%;
+    color: #FF7100;
+
+ }
+ mat-label{
+    color: #FF7100;
+ }
+
+ .mat-input-element{
+    caret-color: #FF7100;
+ }
+ 
+ .mat-form-field-underline{
+    background-color: #FF7100 !important;
+ }
+
+ .button{
+    margin-left: 5%;
+    width: 90%;
+    background: #FF7100;
+    color: #f0e9e2;
+    margin-bottom: 5%;
+ }
+
+ .button_forget{
+    color: #FEB737;
+ }
+ .button_register{
+    margin-left: 5%;
+    width: 90%;
+    border: solid #FF7100 1px;
+    color: #FF7100;
+    background: #FFFFFF;
+    margin-bottom: 5%;
+ }
+
+ hr{
+    background: #FF7100;
+    color: #FF7100;
+    height: 1px;
+	border-width: 0;	
+    clear: both;
+ }

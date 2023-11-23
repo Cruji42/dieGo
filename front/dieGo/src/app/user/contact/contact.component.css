@@ -1,0 +1,35 @@
+.mat-toolbar{
+    background-color: #FF7100 ;
+}
+.img_nav{
+    width: 100px;
+    height: 50px;
+    margin-left: 5%;
+}
+.menu{
+    margin-left: 10%;
+    width: 35%;
+}
+.menu-item{
+    margin: 10%;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 75%;
+}
+.menu-item:hover {
+    text-decoration: underline;
+}
+.button_login{
+    margin-left: 15%;
+    border-radius: 2rem;
+    border: solid 2px #FFFFFF;
+    background-color: #FF7100;
+    color: #FFFFFF;
+}
+.button_register{
+    margin-left: 5%;
+    border-radius: 2rem;
+    border: solid 2px #FF7100;
+    background-color: #FFFFFF;
+    color: #FF7100;
+}

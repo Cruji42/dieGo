@@ -1,0 +1,65 @@
+.welcome_contet{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right, #FF7100, #FFEBA3);
+    
+}
+
+h1{
+ font-size: 50px; 
+ margin-top: 5% !important;  
+ margin-bottom: 5%;
+}
+
+.card_welcome{
+    margin-top: 10vh;
+    width: 80vw;
+    height: 80vh;
+    text-align: center;
+    background: #FFFFFF;
+    color: #FF7100;
+ }
+.mini_card{
+    /* margin-top: 10%; */
+    width: 85%;
+    /* height: 90%; */
+    text-align: center;
+    background: #FFFFFF;
+    color: #FF7100;
+}
+
+.mini_card:hover{
+ border: solid 2px #FEB737;
+}
+
+mat-card-subtitle{
+    color: #FEB737;
+}
+
+.card-img{
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+}
+
+
+.button{
+    margin-left: 5%;
+    width: 90%;
+    border-radius: 2rem ;
+    background: #FF7100;
+    color: #f0e9e2;
+    margin-bottom: 5%;
+ }
+
+ hr{
+    background: #FF7100;
+    color: #FF7100;
+    height: 1px;
+	border-width: 0;	
+    clear: both;
+ }
+
+ 
