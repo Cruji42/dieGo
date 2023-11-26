@@ -15,9 +15,9 @@ app = FastAPI(
 origins = [
     "http://localhost",
     "http://localhost:8000/*",
-    "http://3.133.114.192:8000/*",
-    "http://3.133.114.192:8000/ticket",
-    "http://3.133.114.192:8000/user/login"
+    "http://127.0.0.1:8000/*",
+    "http://127.0.0.1:8000/ticket",
+    "http://127.0.0.1:8000/user/login"
 ]
 
 app.add_middleware(
@@ -32,4 +32,4 @@ app.add_middleware(
 app.include_router(user)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="3.133.114.192", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
