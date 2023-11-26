@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from router.users import user
 import uvicorn
-#from router.events import events
 
 app = FastAPI(
     title="Events",
