@@ -23,6 +23,17 @@ def getUser(Authorization: Optional[str] = Header(None)):
             result = conn.execute(users.select()).fetchall()
             return result
 
+@user.get("/total", response_model=None, tags=["user"])
+def getUser(Authorization: Optional[str] = Header(None)):
+    if not validate(Authorization):
+        result = {"error":True, "message":"Not authentication"}
+        _status = status.HTTP_401_UNAUTHORIZED
+        return JSONResponse(status_code=_status, content=result)
+    else:
+        with engine.connect() as conn:
+            result = conn.execute("select count(user_id) total_users from tbl_users").first()
+            
+            return result
 
 @user.get("/{idUser}", response_model=None, tags=["user"])
 def getSingleUser(idUser: str, Authorization: Optional[str] = Header(None)):

@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, MetaData, text, delete, update
+from sqlalchemy import create_engine, MetaData, text
 
 #engine = create_engine('postgresql+psycopg2://:$\@/')
 #engine = create_engine('postgresql+psycopg2://postgres:$126K4600a\@localhost/db_events')
