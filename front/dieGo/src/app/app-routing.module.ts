@@ -5,6 +5,12 @@ import { RegisterComponent } from './auth/register/register.component';
 import { WelcomeComponent } from './auth/welcome/welcome.component';
 import { HomeComponent } from './user/home/home.component';
 import { ContactComponent } from './user/contact/contact.component';
+import { ProfilComponent } from './user/profil/profil.component';
+import { SavedEventsComponent } from './user/saved-events/saved-events.component';
+import { AddEventsComponent } from './organizer/add-events/add-events.component';
+import { ShowEventComponent } from './user/show-event/show-event.component';
+import { CharsComponent } from './admin/chars/chars.component';
+import { ListEventComponent } from './user/list-event/list-event.component';
 
 const routes: Routes = [
    { path: '', component: HomeComponent},
@@ -12,7 +18,13 @@ const routes: Routes = [
    { path: 'register', component: RegisterComponent},
    { path: 'welcome', component: WelcomeComponent},
    { path: 'home', component: HomeComponent},
-   { path: 'contact', component: ContactComponent}
+   { path: 'contact', component: ContactComponent},
+   { path: 'profile', component: ProfilComponent},
+   { path: 'saved-events', component: SavedEventsComponent},
+   { path: 'add-events', component: AddEventsComponent},
+   { path: 'show-event/:id', component: ShowEventComponent},
+   { path: 'chars', component: CharsComponent},
+   { path: 'list-events', component: ListEventComponent}
 
 ];
 

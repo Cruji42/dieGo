@@ -8,7 +8,7 @@ import { MatDialogRef} from '@angular/material/dialog';
 })
 export class ForgetComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ForgetComponent>,) { }
+  constructor(public dialogRef: MatDialogRef<ForgetComponent>) { }
 
   ngOnInit(): void {
   }

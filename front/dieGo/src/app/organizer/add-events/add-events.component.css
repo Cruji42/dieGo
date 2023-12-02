@@ -1,0 +1,167 @@
+.mat-toolbar{
+    background-color: #FF7100 ;
+}
+.img_nav{
+    width: 100px;
+    height: 50px;
+    margin-left: 5%;
+}
+.menu{
+    margin-left: 10%;
+    width: 35%;
+}
+.menu-item{
+    margin: 10%;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 75%;
+}
+.menu-item:hover {
+    text-decoration: underline;
+}
+.button_login{
+    margin-left: 15%;
+    border-radius: 2rem;
+    border: solid 2px #FFFFFF;
+    background-color: #FF7100;
+    color: #FFFFFF;
+}
+.button_register{
+    margin-left: 5%;
+    border-radius: 2rem;
+    border: solid 2px #FF7100;
+    background-color: #FFFFFF;
+    color: #FF7100;
+}
+
+.title{
+    left: 25px; 
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    font-size: 40px !important;
+    letter-spacing: 3px;
+ }
+
+ .content_saved-events{
+    width: 90vw;
+    margin: auto;
+ }
+
+ .upload-img{
+    width: 90%;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+    border-radius: 1rem;
+    border: solid 2px #FF7100;
+    background-color: #FFFFFF;
+    color: #FF7100;
+ }
+
+ .div_img{
+
+    text-align: center;
+    width: 100%;
+    justify-content: center;    
+    display: block;
+
+}
+
+.form-events{
+    width: 90%;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+ }
+
+.img_form{
+    border-radius: 35rem;
+    width: 20vh;
+    height: 20vh;
+    margin-bottom:5%;
+    margin-top: 5%;
+}
+
+.button{
+    width: 20%;
+    margin: 2% auto;
+    border-radius: 0.25rem;
+    border: solid 2px #FF7100;
+    background-color: #FFFFFF;
+    color: #FF7100;
+    text-align: center;
+
+}
+
+.card_form{
+    margin-top: 5%;
+    border-radius: 1rem;
+    background-color: #FFFFFF ;
+    border: 2px #FF7100 solid;
+    margin-bottom:5%;
+}
+
+
+mat-form-field{
+    text-align: left;
+    width: 90%;
+    color: #FF7100;
+    margin-left: 5%;
+    margin-top: 2%;
+
+ }
+ mat-label{
+    color: #FF7100;
+ }
+
+ ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color:  #FF7100 !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #827f7f !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color:  #FF7100 !important;
+  }
+ .mat-input-element{
+    caret-color: #FF7100;
+
+ }
+
+ .date-time-imput{
+    width: 26.5% !important;
+ }
+
+ .img_footer{
+    width: 100px;
+    height: 50px;
+ }
+.footer_title{
+   
+    color: #FF7100;
+}
+
+.footer_title b{
+    text-decoration: underline;
+}
+
+.footer_title .social_svg{
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+.button_en{
+    margin-left: 10%;
+    background: #FF7100;
+    color: #FFFFFF;
+}
+.button_es{
+    margin-left: 10%;
+}

@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class EventSchema(BaseModel):
+    event_id: Optional[int]
     title: Optional[str]
     subtitle: Optional[str]
     location: Optional[str]

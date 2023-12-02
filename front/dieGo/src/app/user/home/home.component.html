@@ -3,13 +3,27 @@
         <img class="img_nav" src="assets/img/png/no-image.png">
         <span class="example-spacer"></span>
         <div class="menu">
-            <a class="menu-item" href="./">Inicio</a>
-            <a class="menu-item" href="">Explorar</a>
-            <a class="menu-item" href="">Crear</a>
-            <a class="menu-item" href="">Contacto</a>
-
-                <button  class="button_login"  mat-button>Iniciar Sesión</button>
-                <button class="button_register"  mat-button>Registrarse</button>
+            <a class="menu-item" href="home">Inicio</a>
+            <a *ngIf="flag"  class="menu-item" href="list-events">Explorar</a>
+            <a *ngIf="flag"  class="menu-item" href="add-events">Crear</a>
+            <a *ngIf="flag"  class="menu-item" href="contact">Contacto</a>
+            <a *ngIf="!flag"  class="menu-item" href="login">Explorar</a>
+            <a *ngIf="!flag"  class="menu-item" href="login">Crear</a>
+            <a *ngIf="!flag"  class="menu-item" href="login">Contacto</a>
+            <!-- <div> -->
+                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
+                <mat-menu #menu="matMenu">
+                 <button mat-menu-item>Gestionar Eventos</button>
+                  <hr>
+                  <button  mat-menu-item>Perfil</button>
+                  <hr>
+                  <button mat-menu-item>Eventos Guardados</button>
+                  <hr>
+                  <button mat-menu-item>Cerrar Sesión</button>
+                </mat-menu>
+            <!-- </div> -->
+                <button *ngIf="!flag" class="button_login" (click)="goToLogin()"   mat-button>Iniciar Sesión</button>
+                <button  *ngIf="!flag" class="button_register" (click)="goToRegister()"   mat-button>Registrarse</button>
 
         </div>
 
@@ -20,6 +34,8 @@
 <br>
 <br>
 
+<!-- <div style="color:aliceblue">{{eventDataTen[1]}}</div> -->
+
 <div >
     <mat-carousel
       timings="250ms ease-in"
@@ -28,7 +44,6 @@
       color="accent"
       maxWidth="auto"
       proportion="25"
-      slides="5"
       [loop]="true"
       [hideArrows]="false"
       [hideIndicators]="false"
@@ -39,7 +54,7 @@
       <mat-carousel-slide
         #matCarouselSlide
         maxWidth="250px"
-        *ngFor="let slide of slides; let i = index"
+        *ngFor="let data of eventDataTen; let i = index"
         [image]=""
         overlayColor="#FFFFFF"
         [hideOverlay]="false"
@@ -49,12 +64,12 @@
             <mat-grid-list cols="12" rowHeight="40vh">
                 <mat-grid-tile  [colspan]="5">
                     <mat-card class="info_card">
-                        <mat-card-subtitle>fecha</mat-card-subtitle>
-                        <mat-card-title>Titulo del evento</mat-card-title>
+                        <mat-card-subtitle>{{data.event_date}}</mat-card-subtitle>
+                        <mat-card-title>{{data.title}}</mat-card-title>
                         <br>
                         <mat-card-content>
                             <div>
-                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus exercitationem deserunt consequuntur ipsam? Porro praesentium quam asperiores mollitia eius quas! Ipsa pariatur temporibus accusamus quaerat a commodi culpa in corrupti.
+                             {{data.description}}
                             </div>
                             <br>
                             <div class="button">
@@ -119,12 +134,12 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>Titulo del evento</mat-card-title>
-                <mat-card-subtitle>fecha</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[0].title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[0].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus exercitationem deserunt consequuntur ipsam? Porro praesentium quam asperiores mollitia eius quas! Ipsa pariatur temporibus accusamus quaerat a commodi culpa in corrupti.
+                        {{eventDataTen[0].description}}
                     </div>
                     <br>
                     <div class="button">
@@ -137,12 +152,12 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>Titulo del evento</mat-card-title>
-                <mat-card-subtitle>fecha</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[1].title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[1].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus exercitationem deserunt consequuntur ipsam? Porro praesentium quam asperiores mollitia eius quas! Ipsa pariatur temporibus accusamus quaerat a commodi culpa in corrupti.
+                        {{eventDataTen[1].description}}
                     </div>
                     <br>
                     <div class="button">
@@ -155,12 +170,12 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>Titulo del evento</mat-card-title>
-                <mat-card-subtitle>fecha</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[2].title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[2].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus exercitationem deserunt consequuntur ipsam? Porro praesentium quam asperiores mollitia eius quas! Ipsa pariatur temporibus accusamus quaerat a commodi culpa in corrupti.
+                        {{eventDataTen[2].description}}
                     </div>
                     <br>
                     <div class="button">
@@ -169,16 +184,16 @@
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="3" [rowspan]="4">
+        <mat-grid-tile style="width: 50vh;" [colspan]="3" [rowspan]="4">
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>Titulo del evento</mat-card-title>
-                <mat-card-subtitle>fecha</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[3].title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[3].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus exercitationem deserunt consequuntur ipsam? Porro praesentium quam asperiores mollitia eius quas! Ipsa pariatur temporibus accusamus quaerat a commodi culpa in corrupti.
+                        {{eventDataTen[3].description}}
                     </div>
                     <br>
                     <div class="button">
@@ -203,19 +218,19 @@
     <mat-grid-list class="event_grid" cols="12" rowHeight="30vh">
         <mat-grid-tile [colspan]="4">
             <mat-card class="event_data">
-                <mat-card-title>24+</mat-card-title>
+                <mat-card-title>{{totalEventsWeekly}}+</mat-card-title>
                 <mat-card-subtitle>Eventos nuevos en esta semana</mat-card-subtitle>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card class="event_data">
-                <mat-card-title>2M</mat-card-title>
+                <mat-card-title>{{totalUsers}}</mat-card-title>
                 <mat-card-subtitle>Usuarios registrados</mat-card-subtitle>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="4">
             <mat-card class="event_data">
-                <mat-card-title>700</mat-card-title>
+                <mat-card-title>{{totalEvents}}</mat-card-title>
                 <mat-card-subtitle>Eventos organizados</mat-card-subtitle>
             </mat-card>
         </mat-grid-tile>
@@ -225,8 +240,8 @@
 <div class="event_create_line">
     <div class="event_create_content">
         <div class="event_create_content_info" >
-            <h1>Patrocinadores</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque alias quod dicta dignissimos. </p>
+            <h1>Crea tu propio Evento</h1>
+            <p>! Registrate como Organizador para acceder a esta funcion para publicar tus eventos y aí llegar a más gente!</p>
             <div class="button">
             <button mat-button >
                 Crear
@@ -283,13 +298,7 @@
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="3" >
-            <div class="button button_es">
-                <button mat-button >Español</button>
-            </div>
-            <div class="button button_en">
-                <button mat-button >Ingles</button>
-            </div>
-        </mat-grid-tile>
+               </mat-grid-tile>
         <mat-grid-tile [colspan]="6" ></mat-grid-tile>
         <mat-grid-tile [colspan]="3" >
             <div>

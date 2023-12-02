@@ -7,13 +7,15 @@ import uvicorn
 app = FastAPI(
     title="Events",
     description="API for Events Project",
-    version="1.0"
+    version="1.0"   
     '''docs_url="/docsapi",
     redoc_url=None'''
 )
 
 origins = [
     "http://localhost",
+    "http://localhost:4200/*",
+    "http://127.0.0.1:4200/*",
     "http://localhost:8000/*",
     "http://127.0.0.1:8000/*",
     "http://127.0.0.1:8000/events",

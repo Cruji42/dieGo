@@ -17,7 +17,7 @@
                     <img class=" card-img" mat-card-image src="assets/img/png/no-image.png">
                     <mat-card-content>
                         <div class="button">
-                            <button   mat-button>Explorar Eventos</button>
+                            <button  (click)="selectRole('visitor')"  mat-button>Explorar Eventos</button>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -31,11 +31,10 @@
                     <img class=" card-img" mat-card-image src="assets/img/png/no-image.png">
                     <mat-card-content>
                         <div class="button">
-                            <button   mat-button>Crea Evento</button>
+                            <button  (click)="selectRole('organizer')"  mat-button>Crea Evento</button>
                         </div>
                     </mat-card-content>
                 </mat-card>
-               
             </mat-grid-tile>
           </mat-grid-list>
       </mat-card-content>

@@ -1,29 +1,40 @@
 <div class="login_content">
     <mat-card class="card_login" >
+        <img class="logo" src="assets/img/png/no-image.png" alt="">
         <mat-card-title>Login</mat-card-title>
+        <br>
         <mat-card-content>
-            <form >
+            <form [formGroup]="loginForm">
                 <p>
                     <mat-form-field appearance="legacy">
                         <mat-label>Correo Electronico</mat-label>
-                        <input type="email" matInput>
+                        <input id="email" type="email" formControlName="email" name="email" matInput>
+                        <mat-error 
+                        *ngIf="loginForm.controls['email'].status === 'INVALID' && loginForm.controls['email'].touched">
+                        {{loginForm.controls['email'].error}}
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <mat-label>Contraseña</mat-label>
-                      <input type="password" matInput>
+                      <input  id="pass" type="password" formControlName="password" name="password" matInput>
+                      <mat-error
+                      *ngIf="loginForm.controls['password'].status === 'INVALID' && loginForm.controls['password'].touched">
+                      {{loginForm.controls['pass'].error}}
+                    </mat-error>
                     </mat-form-field>
                   </p>
                 
                 <div class="button">
-                    <button  type="submit" mat-button>Iniciar sesión</button>
+                    <button  type="submit" (click)="login()"
+                    [disabled]="loginForm.status === 'INVALID'"  mat-button>Iniciar sesión</button>
                 </div>
             </form>
             <hr>
 
             <p>
-                <a class="button_forget" (click)="openDialog()">¿Olvidaste tu contraseña?</a>
+                <a class="button_forget" (click)="openForgetDialog()">¿Olvidaste tu contraseña?</a>
             </p>
 
 

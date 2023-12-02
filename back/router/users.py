@@ -22,6 +22,12 @@ def getUser(Authorization: Optional[str] = Header(None)):
         with engine.connect() as conn:
             result = conn.execute(users.select()).fetchall()
             return result
+        
+@user.get("/public/total", response_model=None, tags=["user"])
+def getUser(Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+            result = conn.execute("select count(user_id) total_users from tbl_users").first()
+            return result
 
 @user.get("/total", response_model=None, tags=["user"])
 def getUser(Authorization: Optional[str] = Header(None)):
@@ -32,7 +38,6 @@ def getUser(Authorization: Optional[str] = Header(None)):
     else:
         with engine.connect() as conn:
             result = conn.execute("select count(user_id) total_users from tbl_users").first()
-            
             return result
 
 @user.get("/{idUser}", response_model=None, tags=["user"])
@@ -105,7 +110,7 @@ def addUser(data_user: UserSchema, response: Response):
         try:
             result = conn.execute(users.select().where(users.c.email == data_user.email)).first()
             message= "User not found"
-
+            
             if result != None:
                 #Check password
                 password_encrypted = result[4]
@@ -113,7 +118,7 @@ def addUser(data_user: UserSchema, response: Response):
                     user_json = {"id":result[0]}
                     encoded_jwt = jwt.encode(user_json, "$126K4600a", algorithm="HS256")
                     response.set_cookie(key="token", value=encoded_jwt)
-                    result = {"error":False, "message" :"Loged"}
+                    result = {"error":False, "message" :"Loged", "token": encoded_jwt, "id": result[0]}
                     return result
                 else:
                     message = "Password didn't match"

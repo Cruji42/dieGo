@@ -117,6 +117,7 @@ mat-card img {
 .event_card{
     /* margin-left: 10%; */
     width: 80%;
+    /* height: 50vh; */
     background: #FFFFFF;
     color: #FF7100;
     border-radius: 0.25rem;
@@ -265,4 +266,22 @@ mat-card img {
     border: solid 2px #FF7100;
     background-color: #FFFFFF;
     color: #FF7100;
+}
+
+
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
+
 }

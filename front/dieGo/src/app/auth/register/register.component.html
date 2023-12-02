@@ -1,36 +1,71 @@
 <div class="register_content">
     <mat-card class="card_register" >
+        <img class="logo" src="assets/img/png/no-image.png" alt="">
         <mat-card-title>Registro</mat-card-title>
         <mat-card-content>
-            <form >
+            <form [formGroup]="registerForm" >
                 <p>
                     <mat-form-field appearance="legacy">
-                        <mat-label>Correo Electronico</mat-label>
-                        <input type="email" matInput>
+                        <mat-label>Nombre</mat-label>
+                        <input name="name" type="text" formControlName="name" matInput>
+                        <mat-error style="color: black;"
+                        *ngIf="registerForm.controls['name'].status === 'INVALID' && registerForm.controls['name'].touched">
+                        {{registerForm.controls['name'].error}}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                 <p>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Apellidos</mat-label>
+                        <input name="last_name" formControlName="last_name" type="text" matInput>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy">
-                        <mat-label>Nombre</mat-label>
-                        <input type="text" matInput>
+                        <mat-label>Cumpleaños</mat-label>
+                        <input formControlName="birth_day" max="{{maxDate | date: 'yyyy-MM-dd'}}" name="birth_day" type="date" matInput>
+                    </mat-form-field>
+                </p>
+                <p>
+
+                    <mat-form-field>
+                         <mat-label>Genero</mat-label>
+                        <select formControlName="genre" matNativeControl required>
+                            <option value="F">Femenino</option>
+                            <option value="M">Masculino</option>
+                        </select>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Numero Telefonico</mat-label>
+                        <input formControlName="phone_number" name="phone_number" type="number" matInput>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Correo Electronico</mat-label>
+                        <input formControlName="email" type="email" matInput>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <mat-label>Contraseña</mat-label>
-                      <input type="password" matInput>
+                      <input formControlName="password" type="password" matInput>
                     </mat-form-field>
                 </p>
 
                 <p>
                     <mat-form-field>
                         <mat-label>Repetir Contraseña</mat-label>
-                      <input type="password" matInput>
+                      <input formControlName="confirmPassword" name="confirmPassword" type="password" matInput>
                     </mat-form-field>
-                  </p>
+                  </p> 
+
+                
                 
                 <div class="button">
-                    <button  type="submit" mat-button>Registrarte</button>
+                    <button [disabled]="registerForm.status === 'INVALID'"  type="submit" (click)=" register()" mat-button>Registrarte</button>
                 </div>
             </form>
             <hr>

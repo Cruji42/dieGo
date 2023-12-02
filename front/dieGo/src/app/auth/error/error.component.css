@@ -1,0 +1,23 @@
+::ng-deep mat-dialog-container {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    width: 50vw !important;
+    justify-content: center !important;
+    display: inline-flex !important;
+    text-align: center !important;
+ }
+
+ svg{
+    margin-bottom: 5%;
+ }
+
+
+ .button{
+    margin-left: 5%;
+    width: 90%;
+    background: #FF7100;
+    color: #f0e9e2;
+    margin-bottom: 5%;
+ }
+
+ 

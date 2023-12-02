@@ -12,4 +12,4 @@ class UserSchema(BaseModel):
     disabled: Optional[bool]
     role: Optional[str]
     phone_number: Optional[str]
-    picture: Optional[str]
+    picture: Optional[str]  

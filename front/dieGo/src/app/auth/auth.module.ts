@@ -11,6 +11,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ForgetComponent } from './forget/forget.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -20,6 +23,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RegisterComponent,
     ForgetComponent,
     WelcomeComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -28,9 +32,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatGridListModule
-    // AuthService
+    MatGridListModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  providers: [ AuthService]
 
 })
 export class AuthModule { }

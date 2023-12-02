@@ -19,7 +19,6 @@ mat-card-title{
  }
 
  mat-form-field{
-    text-align: center;
     width: 90%;
     color: #FF7100;
 
@@ -63,3 +62,28 @@ mat-card-title{
 	border-width: 0;	
     clear: both;
  }
+
+ .logo{
+   width: 25%;
+   margin: 5%;
+
+ }
+
+ ::ng-deep .mat-focused .mat-form-field-label {
+   /*change color of label*/
+   color:  #FF7100 !important;
+  }
+ 
+  ::ng-deep.mat-form-field-underline {
+   /*change color of underline*/
+   background-color: #827f7f !important;
+ } 
+ 
+ ::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color:  #FF7100 !important;
+ }
+.mat-input-element{
+   caret-color: #FF7100;
+
+}

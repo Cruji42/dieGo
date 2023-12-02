@@ -1,0 +1,7 @@
+
+*.pyc
+*.pyc
+*.pyc
+*.pyc
+back/model/__pycache__/persistence.cpython-311.pyc
+back/config/__pycache__/db.cpython-311.pyc

@@ -1,0 +1,96 @@
+.admin-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+.sideBare{
+    width: 18vw;
+    padding: 1%;
+    background: linear-gradient(to bottom, #FF7100, #FEB737);
+    text-align: center;
+}
+
+.logo{
+    width: 20%;
+    border-radius: 0.5rem;
+}
+
+.user_content{
+    margin: 10% auto;
+    text-align: left;
+    width: 70%;
+    justify-content:space-evenly;   
+    display: flex;
+    position: absolute;
+    bottom: 2px
+    
+}
+.div_img_profile{
+    width: 10%;
+    margin-right: 20px;
+}
+.div_user_name{
+    width: 70%;
+    display : flex;
+    align-items : center;
+}
+.div_user_name h5{
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+.div_user_name h5 button{
+    margin: 0;
+    padding: 0;
+}
+.img_profile{
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+}
+.admin_content{
+    background-color: #FFFFFF;
+}
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
+
+}
+
+.mat-toolbar{
+    background-color: #FF7100;
+}
+mat-horizontal-stepper{
+    background: #FFFFFF !important;
+    color: #0a0a0a;
+}
+  
+ ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-label, .mat-step-header .mat-step-icon{
+    background-color: #FEB737 ; 
+ }
+
+ ::ng-deep  .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: transparent !important;
+    color: #FEB737;
+
+  }
+ 
+
+::ng-deep .mat-step-header .mat-step-label{
+    color: #FEB737 !important;
+  } 
+
+::n-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
+    background-color: #FEB737 ;  
+}
+

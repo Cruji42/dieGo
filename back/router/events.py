@@ -25,6 +25,12 @@ def getEvent(Authorization: Optional[str] = Header(None)):
             return result
 
 
+@router_events.get("/public/all", response_model=List[EventSchema], tags=["events"])
+def getEvent(Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+            result = conn.execute(tbl_events.select().where(tbl_events.c.disabled == False).order_by(tbl_events.c.creation_time.desc())).fetchall()
+            return result
+
 @router_events.get("/admin", response_model=List[EventSchema], tags=["events"])
 def getEvent(Authorization: Optional[str] = Header(None)):
     if not validate(Authorization):
@@ -34,6 +40,14 @@ def getEvent(Authorization: Optional[str] = Header(None)):
     else:
         with engine.connect() as conn:
             result = conn.execute(tbl_events.select().order_by(tbl_events.c.creation_time.desc())).fetchall()
+            return result
+
+
+@router_events.get("/public/total", response_model=None, tags=["events"])
+def getUser(Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+            result = conn.execute("select count(event_id) total_events from tbl_events").first()
+            
             return result
 
 
@@ -48,6 +62,26 @@ def getUser(Authorization: Optional[str] = Header(None)):
             result = conn.execute("select count(event_id) total_events from tbl_events").first()
             
             return result
+
+
+
+
+@router_events.get("/public/weekly", response_model=None, tags=["events"])
+def getUser(Authorization: Optional[str] = Header(None)):
+        #get current day range
+        current_time = datetime.datetime.now()
+        week = int(current_time.strftime("%V"))
+        year = int(current_time.strftime("%Y"))
+        start_day = date.fromisocalendar(year, week, 1).strftime("%Y-%m-%d")
+        end_day = date.fromisocalendar(year, week, 7).strftime("%Y-%m-%d")
+        with engine.connect() as conn:
+            query = f"select count(event_id) total_events from tbl_events where creation_time between '{start_day} 00:00:00' and '{end_day} 23:59:00'"
+            print(query)
+            result = conn.execute(query).first()
+            
+            return result
+
+
 
 
 @router_events.get("/weekly", response_model=None, tags=["events"])
@@ -70,6 +104,13 @@ def getUser(Authorization: Optional[str] = Header(None)):
             
             return result
 
+@router_events.get("/public/top10", response_model=List[EventSchema], tags=["events"])
+def getEvent(Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+            result = conn.execute(tbl_events.select().order_by(tbl_events.c.creation_time.desc()).limit(10)).fetchall()
+            return result
+
+
 
 @router_events.get("/top10", response_model=List[EventSchema], tags=["events"])
 def getEvent(Authorization: Optional[str] = Header(None)):
@@ -90,6 +131,13 @@ def getEvent(Authorization: Optional[str] = Header(None)):
         _status = status.HTTP_401_UNAUTHORIZED
         return JSONResponse(status_code=_status, content=result)
     else:
+        with engine.connect() as conn:
+            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id) desc limit 5)"
+            result = conn.execute(query).fetchall()
+            return result
+
+@router_events.get("/public/top5", response_model=List[EventSchema], tags=["events"])
+def getEvent(Authorization: Optional[str] = Header(None)):
         with engine.connect() as conn:
             query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id) desc limit 5)"
             result = conn.execute(query).fetchall()
@@ -180,13 +228,16 @@ def addFavoriteEvent(data: dict):
             return JSONResponse(status_code=_status, content=result)
 
 
-@router_events.post("/", response_model=EventSchema, tags=["events"])
-def addEvent(data_event: EventSchema):
+@router_events.post("/{user_id}", response_model=EventSchema, tags=["events"])
+def addEvent(data_event: EventSchema, user_id: str):
     with engine.connect() as conn: 
         try:
             data_event = data_event.dict()
             #METADATA
+
             conn.execute(tbl_events.insert().values(data_event))
+            query = f"INSERT INTO tbl_events_created ( tbl_users_id, tbl_events_id ) values ( {user_id}, (SELECT MAX(event_id) FROM tbl_events))"
+            conn.execute(query)
             #return Response(status_code=HTTP_201_CREATED)
             _status = status.HTTP_201_CREATED
             result =  {"error":False, "message":"Event created successfully"}
