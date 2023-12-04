@@ -3,15 +3,26 @@
         <img class="img_nav" src="assets/img/png/no-image.png">
         <span class="example-spacer"></span>
         <div class="menu">
-            <a class="menu-item" href="./">Inicio</a>
-            <a class="menu-item" href="">Explorar</a>
-            <a class="menu-item" href="">Crear</a>
-            <a class="menu-item" href="">Contacto</a>
-
-                <button  class="button_login"  mat-button>Iniciar Sesión</button>
-                <button class="button_register"  mat-button>Registrarse</button>
+            <a class="menu-item" href="home">Inicio</a>
+            <a *ngIf="flag"  class="menu-item" href="list-events">Explorar</a>
+            <a *ngIf="flag"  class="menu-item" href="add-events">Crear</a>
+            <a *ngIf="flag"  class="menu-item" href="contact">Contacto</a>
+            <!-- <div> -->
+                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
+                <mat-menu #menu="matMenu">
+                 <button mat-menu-item>Gestionar Eventos</button>
+                  <hr>
+                  <button  mat-menu-item>Perfil</button>
+                  <hr>
+                  <button mat-menu-item>Eventos Guardados</button>
+                  <hr>
+                  <button mat-menu-item>Cerrar Sesión</button>
+                </mat-menu>
+            <!-- </div> -->
 
         </div>
+
+           
         
       </mat-toolbar-row>
 </mat-toolbar>
@@ -40,30 +51,30 @@
         <div class="div_form">
             <mat-card  class="card_form">
                 <mat-card-content>
-                    <form >
-                        <p>
+                     <form [formGroup]="userForm">
+                         <p>
                             <mat-form-field appearance="legacy">
                                 <mat-label>Nombre</mat-label>
-                                <input name="name" type="text" matInput>
+                                <input name="name" type="text" formControlName="name" matInput>
                             </mat-form-field>
                         </p>
                          <p>
                             <mat-form-field appearance="legacy">
                                 <mat-label>Apellidos</mat-label>
-                                <input name="last_name" type="text" matInput>
+                                <input name="last_name" formControlName="last_name" type="text" matInput>
                             </mat-form-field>
                         </p>
                         <p>
                             <mat-form-field appearance="legacy">
                                 <mat-label>Cumpleaños</mat-label>
-                                <input max="{{maxDate | date: 'yyyy-MM-dd'}}" name="birth_day" type="date" matInput>
+                        <input formControlName="birth_day" max="{{maxDate | date: 'yyyy-MM-dd'}}" name="birth_day" type="date" matInput>
                             </mat-form-field>
                         </p>
                         <p>
         
                             <mat-form-field>
                                  <mat-label>Genero</mat-label>
-                                <select matNativeControl required>
+                                 <select formControlName="genre"  matNativeControl required>
                                     <option value="F">Femenino</option>
                                     <option value="M">Masculino</option>
                                 </select>
@@ -72,21 +83,16 @@
                         <p>
                             <mat-form-field appearance="legacy">
                                 <mat-label>Numero Telefonico</mat-label>
-                                <input name="phone_number" type="number" matInput>
+                                <input formControlName="phone_number" name="phone_number" type="number" matInput>
                             </mat-form-field>
-                        </p>
-                        <p>
-                            <mat-form-field appearance="legacy">
-                                <mat-label>Correo Electronico</mat-label>
-                                <input type="email" matInput>
-                            </mat-form-field>
-                        </p>
+                        </p> 
+
                       
                         
                         <div class="button">
-                            <button  type="submit" mat-button>Guardar</button>
+                            <button [disabled]="userForm.status === 'INVALID'"  type="submit" (click)="Editar()" mat-button>Editar</button>
                         </div>
-                    </form>
+                    </form> 
     
                     
                 </mat-card-content>

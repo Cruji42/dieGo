@@ -181,3 +181,9 @@ mat-form-field{
     justify-content: space-around;
 
 }
+
+
+.row{
+    display: flex;
+    justify-content: space-evenly;
+}

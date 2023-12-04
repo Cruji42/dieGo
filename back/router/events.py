@@ -161,7 +161,21 @@ def getSingleEvent(idEvent: str, Authorization: Optional[str] = Header(None)):
                 result =  {"error":True, "message":"Event not found"}
                 
                 return JSONResponse(status_code=_status, content=result)
-    
+
+@router_events.get("/public/{idEvent}", response_model=None, tags=["events"])
+def getSingleEvent(idEvent: str, Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+                result = conn.execute(tbl_events.select().where(tbl_events.c.event_id == idEvent)).first()
+            
+                print("Result from DB", result)
+                if result != None:
+                    return result
+                _status = status.HTTP_500_INTERNAL_SERVER_ERROR
+                result =  {"error":True, "message":"Event not found"}
+                
+                return JSONResponse(status_code=_status, content=result) 
+
+
 
 @router_events.get("/created/{idUser}", response_model=None, tags=["events"])
 def getEventByUser(idUser: int, Authorization: Optional[str] = Header(None)):
@@ -171,7 +185,7 @@ def getEventByUser(idUser: int, Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_events_id FROM public.tbl_events_created where tbl_users_id = {idUser})"
+                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_events_id FROM public.tbl_events_created where tbl_users_id = {idUser}) and tbl_events.disabled=false"
                 result = conn.execute(query).fetchall()
             
                 print("Result from DB", result)
@@ -232,10 +246,23 @@ def addFavoriteEvent(data: dict):
 def addEvent(data_event: EventSchema, user_id: str):
     with engine.connect() as conn: 
         try:
+            data = { "title": data_event.title,
+                    "subtitle": data_event.subtitle,
+                    "location": data_event.location,
+                    "description": data_event.description,
+                    "event_date": data_event.event_date,
+                    "disabled": data_event.disabled,
+                    "image": data_event.image,
+                    "partner": data_event.partner,
+                    "start_date": data_event.start_date,
+                    "end_date": data_event.end_date,
+                    "price": data_event.price,
+                    "dress_code": data_event.dress_code}
+
             data_event = data_event.dict()
             #METADATA
-
-            conn.execute(tbl_events.insert().values(data_event))
+            
+            conn.execute(tbl_events.insert().values(data))
             query = f"INSERT INTO tbl_events_created ( tbl_users_id, tbl_events_id ) values ( {user_id}, (SELECT MAX(event_id) FROM tbl_events))"
             conn.execute(query)
             #return Response(status_code=HTTP_201_CREATED)
@@ -258,8 +285,7 @@ def update_event(data_event: EventSchema, idEvent: str, Authorization: Optional[
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            try:
-                
+            try:    
                 conn.execute(tbl_events.update().values(title = data_event.title, subtitle = data_event.subtitle, location = data_event.location, description = data_event.description, event_date = data_event.event_date, disabled = data_event.disabled, image = data_event.image, partner = data_event.partner, start_date = data_event.start_date, end_date = data_event.end_date, price = data_event.price, dress_code = data_event.dress_code).where(tbl_events.c.event_id == idEvent))
             
                 result = conn.execute(tbl_events.select().where(tbl_events.c.event_id == idEvent)).first() 
@@ -289,7 +315,8 @@ def delete_event(idEvent: str,Authorization: Optional[str] = Header(None)):
     else:
         with engine.connect() as conn:
             try:
-                conn.execute(tbl_events.delete().where(tbl_events.c.event_id == idEvent))
+                query = f"UPDATE tbl_events set disabled=true where event_id={idEvent}"
+                conn.execute(query)
             
                 result = {"error":False, "message":"Event deleted"}
                 _status = status.HTTP_200_OK
@@ -302,8 +329,8 @@ def delete_event(idEvent: str,Authorization: Optional[str] = Header(None)):
             return JSONResponse(status_code=_status, content=result)
 
 
-@router_events.delete("/saved/{idEvent}", status_code=200, tags=["events"])
-def delete_event(idEvent: str,Authorization: Optional[str] = Header(None)):
+@router_events.delete("/saved/{idEvent}/{idUser}", status_code=200, tags=["events"])
+def delete_event(idEvent: str, idUser: str, Authorization: Optional[str] = Header(None)):
     if not validate(Authorization):
         result = {"error":True, "message":"Not authentication"}
         _status = status.HTTP_401_UNAUTHORIZED
@@ -311,7 +338,7 @@ def delete_event(idEvent: str,Authorization: Optional[str] = Header(None)):
     else:
         with engine.connect() as conn:
             try:
-                conn.execute(tbl_events_saved.delete().where(tbl_events_saved.c.id == idEvent))
+                conn.execute(tbl_events_saved.delete().where(tbl_events_saved.c.tbl_event_id == idEvent and tbl_events_saved.c.tbl_user_id == idUser ))
             
                 result = {"error":False, "message":"Event removed"}
                 _status = status.HTTP_200_OK

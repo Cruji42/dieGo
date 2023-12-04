@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SavedEventsComponent } from './saved-events.component';
+import { ListFavoriteEventComponent } from './list-favorite-event.component';
 
-describe('SavedEventsComponent', () => {
-  let component: SavedEventsComponent;
-  let fixture: ComponentFixture<SavedEventsComponent>;
+describe('ListFavoriteEventComponent', () => {
+  let component: ListFavoriteEventComponent;
+  let fixture: ComponentFixture<ListFavoriteEventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SavedEventsComponent ]
+      declarations: [ ListFavoriteEventComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SavedEventsComponent);
+    fixture = TestBed.createComponent(ListFavoriteEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -72,4 +72,33 @@ export class UserService {
     let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
     return this.http.post(this.url_events +'/saved', { id_event: id_event, id_user: id_user} , { headers: headers})
   }
+
+  getFavoriteEvent(token, id_user){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
+    return this.http.get(this.url_events + '/saved/'+ id_user, { headers: headers})
+  }
+
+  deleteFavoriteEvent(token, idEvent, idUser){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
+    return this.http.delete(this.url_events + '/saved/' + idEvent + '/' + idUser, { headers: headers})
+  }
+
+  getEvent(token, id){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
+    return this.http.get(this.url_events + '/' + id, {headers: headers})
+  }
+
+  getPublicEvent(token, id){
+    return this.http.get(this.url_events + '/public/' + id)
+  }
+
+  getDataUser(token, id){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
+     return this.http.get( this.url_users +'/' + id, {headers: headers})
+  }
+
+  editUserData(token, data){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
+    return this.http.put(this.url_users + '/' + data.user_id, data, {headers: headers})
+  }
 }

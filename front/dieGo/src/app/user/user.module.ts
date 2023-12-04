@@ -11,7 +11,6 @@ import { ContactComponent } from './contact/contact.component';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ProfilComponent } from './profil/profil.component';
-import { SavedEventsComponent } from './saved-events/saved-events.component';
 import { ShowEventComponent } from './show-event/show-event.component';
 import { CookieService } from 'ngx-cookie-service';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListEventComponent } from './list-event/list-event.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListFavoriteEventComponent } from './list-favorite-event/list-favorite-event.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,9 +30,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HomeComponent,
     ContactComponent,
     ProfilComponent,
-    SavedEventsComponent,
     ShowEventComponent,
-    ListEventComponent
+    ListEventComponent,
+    ListFavoriteEventComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +47,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     HttpClientModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ], 
   providers: [CookieService, UserService]
 })

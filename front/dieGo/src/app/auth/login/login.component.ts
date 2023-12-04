@@ -4,6 +4,7 @@ import { ForgetComponent } from '../forget/forget.component';
 import { ErrorComponent } from '../error/error.component';
 import { AuthService } from '../auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  token;
 
 
 
-  constructor(public dialog: MatDialog, private authSevice: AuthService) {
+  constructor(public dialog: MatDialog, private authSevice: AuthService, private cookieService: CookieService) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
@@ -25,6 +27,8 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this. token = this.cookieService.get('token');
+    if(this.token) location.href ='home'
 
   }
 

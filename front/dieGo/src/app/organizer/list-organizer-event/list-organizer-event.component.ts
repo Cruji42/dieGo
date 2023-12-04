@@ -1,46 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { OrganizerService } from '../organizer.service';
 import { CookieService } from 'ngx-cookie-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-
 @Component({
-  selector: 'app-list-event',
-  templateUrl: './list-event.component.html',
-  styleUrls: ['./list-event.component.css']
+  selector: 'app-list-organizer-event',
+  templateUrl: './list-organizer-event.component.html',
+  styleUrls: ['./list-organizer-event.component.css']
 })
-export class ListEventComponent implements OnInit {
+export class ListOrganizerEventComponent implements OnInit {
 
   events: any[];
   token;
   copy: boolean;
   id_user;
   flag: boolean;
-  
 
-  constructor(private usersService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { }
+  constructor(private organizerService: OrganizerService, private cookieService: CookieService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
 
     if(!this.token){ location.href= 'login';} else { this.flag = true}
-    this.usersService.getActiveEvents(this.token).subscribe((data: any)=>{
+    this.listOrganizerEvent()
+  }
+
+
+  listOrganizerEvent(){
+    this.organizerService.getEventOrganizer(this.token, this.id_user).subscribe((data: any) => {
       this.events = data;
       console.log(data)
     })
   }
 
 
-  addToFavorite(id){
-
-    this.usersService.AddEventsToFavorite(this.token, id, this.id_user).subscribe((data: any) => {
-      console.log(data)
-      if(!data.error) this.openSnackBar('Agregado a Favoritos');
-    })
-
+  edit(e){
+    console.log(e);
+    localStorage.setItem('edit_event_data', JSON.stringify(e));
+    location.href= 'edit-event';
+   
   }
 
+
+  delete(id){
+    this.organizerService.deleteEvent(this.token, id ).subscribe((data: any) =>{
+      console.log(data);
+      if(!data.error){
+         this.openSnackBar('Evento borrado ')
+         this.listOrganizerEvent();
+      }
+    }, error => {
+      this.openSnackBar(error.error.message)
+    })
+  }
 
 
   copyText(id){
@@ -73,9 +86,5 @@ export class ListEventComponent implements OnInit {
         verticalPosition: 'bottom',
       });
     }
-
-  showEvent(id){
-    location.href= 'show-event/' + id
-  }
 
 }

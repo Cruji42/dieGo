@@ -3,45 +3,62 @@ import { UserService } from '../user.service';
 import { CookieService } from 'ngx-cookie-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-
 @Component({
-  selector: 'app-list-event',
-  templateUrl: './list-event.component.html',
-  styleUrls: ['./list-event.component.css']
+  selector: 'app-list-favorite-event',
+  templateUrl: './list-favorite-event.component.html',
+  styleUrls: ['./list-favorite-event.component.css']
 })
-export class ListEventComponent implements OnInit {
+export class ListFavoriteEventComponent implements OnInit {
 
   events: any[];
   token;
   copy: boolean;
   id_user;
   flag: boolean;
-  
 
   constructor(private usersService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
 
     if(!this.token){ location.href= 'login';} else { this.flag = true}
-    this.usersService.getActiveEvents(this.token).subscribe((data: any)=>{
+    this.FavoriteEventData();
+  }
+
+
+  FavoriteEventData(){
+     this.usersService.getFavoriteEvent(this.token, this.id_user).subscribe((data: any)=>{
       this.events = data;
       console.log(data)
     })
   }
 
 
-  addToFavorite(id){
+  deleteToFavorite(id, title){
+     this.usersService.deleteFavoriteEvent(this.token,id, this.id_user).subscribe((data: any)=> {
+      console.log(data);
+      if(!data.error){
+         this.openSnackBar('Se elimino el evento "'+ title +'" de tus favoritos');
+         this.FavoriteEventData();
+      }
+     })
+  }
 
-    this.usersService.AddEventsToFavorite(this.token, id, this.id_user).subscribe((data: any) => {
-      console.log(data)
-      if(!data.error) this.openSnackBar('Agregado a Favoritos');
-    })
-
+  gotoEditEvent(data){
+     localStorage.setItem('update_event', data);
+     location.href='edit_event'
   }
 
 
+  openSnackBar(label) {
+    this._snackBar.open(label, 'Cerrar', {
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+    });
+  }
+  
 
   copyText(id){
     let url = location.origin
@@ -65,17 +82,4 @@ export class ListEventComponent implements OnInit {
         this.copy = false;
       }, 2000)
     }
-
-
-    openSnackBar(label) {
-      this._snackBar.open(label, 'Cerrar', {
-        horizontalPosition: 'start',
-        verticalPosition: 'bottom',
-      });
-    }
-
-  showEvent(id){
-    location.href= 'show-event/' + id
-  }
-
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorComponent } from '../error/error.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   maxDate = new Date();
+  token;
 
-  constructor( public dialog: MatDialog) {
+  constructor( public dialog: MatDialog, private cookieService: CookieService) {
     this.registerForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
@@ -28,6 +30,9 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this. token = this.cookieService.get('token');
+    if(this.token) location.href ='home'
+    
   }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ErrorComponent } from '../error/error.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-welcome',
@@ -11,9 +12,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class WelcomeComponent implements OnInit {
 
   userData = JSON.parse(localStorage.getItem('userData'));
-  constructor( private authService: AuthService, public dialog: MatDialog) { }
+  token;
+  constructor( private authService: AuthService, public dialog: MatDialog, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this. token = this.cookieService.get('token');
+    if(this.token) location.href ='home'
   }
 
   openErrorDialog( info): void {

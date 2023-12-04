@@ -10,12 +10,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddEventsComponent } from './add-events/add-events.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { OrganizerService } from './organizer.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { ListOrganizerEventComponent } from './list-organizer-event/list-organizer-event.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 
 
 @NgModule({
   declarations: [
-    AddEventsComponent
+    AddEventsComponent,
+    ListOrganizerEventComponent,
+    EditEventComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +33,9 @@ import { OrganizerService } from './organizer.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule, 
+    MatTooltipModule
 
   ],
   providers: [ OrganizerService]

@@ -7,23 +7,20 @@
             <a *ngIf="flag"  class="menu-item" href="list-events">Explorar</a>
             <a *ngIf="flag"  class="menu-item" href="add-events">Crear</a>
             <a *ngIf="flag"  class="menu-item" href="contact">Contacto</a>
-            <a *ngIf="!flag"  class="menu-item" href="login">Explorar</a>
-            <a *ngIf="!flag"  class="menu-item" href="login">Crear</a>
-            <a *ngIf="!flag"  class="menu-item" href="login">Contacto</a>
             <!-- <div> -->
                 <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
                 <mat-menu #menu="matMenu">
-                 <button mat-menu-item>Gestionar Eventos</button>
+                 <button mat-menu-item >Gestionar Eventos</button>
                   <hr>
-                  <button  mat-menu-item>Perfil</button>
+                  <button  mat-menu-item (click)="goToPage('profile')">Perfil</button>
                   <hr>
                   <button mat-menu-item>Eventos Guardados</button>
                   <hr>
                   <button mat-menu-item>Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
-                <button *ngIf="!flag" class="button_login" (click)="goToLogin()"   mat-button>Iniciar Sesión</button>
-                <button  *ngIf="!flag" class="button_register" (click)="goToRegister()"   mat-button>Registrarse</button>
+                <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
+                <button  *ngIf="!flag" class="button_register" (click)="goToPage('register')"   mat-button>Registrarse</button>
 
         </div>
 

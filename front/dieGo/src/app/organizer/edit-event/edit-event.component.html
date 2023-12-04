@@ -10,17 +10,15 @@
             <!-- <div> -->
                 <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
                 <mat-menu #menu="matMenu">
-                 <button mat-menu-item >Gestionar Eventos</button>
+                 <button mat-menu-item>Gestionar Eventos</button>
                   <hr>
-                  <button  mat-menu-item (click)="goToPage('profile')">Perfil</button>
+                  <button  mat-menu-item>Perfil</button>
                   <hr>
                   <button mat-menu-item>Eventos Guardados</button>
                   <hr>
                   <button mat-menu-item>Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
-                <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
-                <button  *ngIf="!flag" class="button_register" (click)="goToPage('register')"   mat-button>Registrarse</button>
 
         </div>
 
@@ -30,63 +28,104 @@
 </mat-toolbar>
 <br>
 <br>
-
 <div>
-    <div class="content_show-event">
-        <div class="div-event">
-            <mat-card  class="card_event">
-                <img class="img_card_event" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <div class="title">
+        Crear un nuevo Evento
+    </div> 
+    <div class="content_add-events">
+
+        <!-- <div class="upload-img">
+
+            <div class="div_img">
+                <img  class="img_form" src="assets/img/png/no-image.png" alt="">
+            </div>
+            
+            <div class="button">
+                <button   mat-button>subir</button>
+            </div>
+
+        </div> -->
+
+        <div class="form-events">
+            <mat-card  class="card_form">
                 <mat-card-content>
-                    <h2>{{event.title}}</h2>
-                    <h4>{{event.subtitle}}</h4>
+                    <form  [formGroup]="eventForm" >
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Titulo</mat-label>
+                                <input name="title" formControlName="title" type="text" matInput>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Subtitulo</mat-label>
+                                <input name="subtitle" formControlName="subtitle" type="text" matInput>
+                            </mat-form-field>
+                        </p>
+                         <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Organizador</mat-label>
+                                <input name="partner" formControlName="partner" type="text" matInput>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field class="date-time-imput" appearance="legacy">
+                                <mat-label>Fecha de inicio</mat-label>
+                                <input min="{{minDate | date: 'yyyy-MM-ddTHH:mm'}}" name="start_date" formControlName="start_date" type="datetime-local" matInput>
+                            </mat-form-field>
+                            <mat-form-field class="date-time-imput" appearance="legacy">
+                                <mat-label>Fecha de termino</mat-label>
+                                <input min="{{minDate | date: 'yyyy-MM-ddTHH:mm'}}" name="end_date" formControlName="end_date" type="datetime-local" matInput>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Ubicacion (link de google maps)</mat-label>
+                                <input name="location" formControlName="location" type="url" matInput>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Descripción</mat-label>
+                                <textarea name="description" type="text" formControlName="description" matInput></textarea>
+                            </mat-form-field>
+                        </p>
 
-                    <hr>
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Costo</mat-label>
+                                <input min="1" name="price" type="number" formControlName="price" matInput>
+                            </mat-form-field>
+                        </p>
 
-                    <h5>Organizador </h5>
-                    <p>{{event.partner}}</p>
-
-                    <div class="title_hours">
-                        <h5 class="hour">Fecha de inicio</h5>
-                        <h5 class="hour">Fecha de termino</h5>
-                    </div>
-
-                    <div class="title_hours">
-                        <p class="hour">{{event.start_date | date: 'd'}} de {{event.start_date | date: 'MMMM'}}  {{event.start_date | date: 'YYYY'}}</p>
-                        <p class="hour">{{event.end_date | date: 'd'}} de {{event.end_date | date: 'MMMM'}}  {{event.end_date | date: 'YYYY'}}</p>
-                    </div>
-                   
-                   
-                    <div class="title_hours">
-                        <h5 class="hour">Hora inicio</h5>
-                        <h5 class="hour">Hora termino</h5>
-                    </div>
-                    <div class="title_hours">
-                        <p class="hour">{{event.start_date | date: 'hh:mm'}}</p>
-                        <p class="hour">{{event.end_date | date: 'hh:mm'}}</p>
-                    </div>
-
-                    <h5>Ubicacion</h5>
-                    <p><a href="event.location" target="_blank">{{event.location}}</a></p>
-
-                    <h5>Descripción</h5>
-                    <p>{{event.description}}</p>
+                        <p>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>Vestimenta</mat-label>
+                                <textarea name="dress_code" formControlName="dress_code" type="text" matInput></textarea>
+                            </mat-form-field>
+                        </p>
+                      
+                        <div class="row">
+                            <div class="button">
+                                <button (click)="Cancel()" type="submit" mat-button>Cancelar</button>
+                            </div>
+                            <div class="button">
+                                <button   [disabled]="eventForm.status === 'INVALID'" (click)="editEvent()" type="submit" mat-button>Publicar</button>
+                            </div>
+                        </div>
+                    </form>
+    
                     
-                    <h5>Costo</h5>
-                    <p>${{event.price}}</p>
-
-                    <h5>Vestimenta</h5>
-                    <p>{{event.dress_code}}</p>
-
                 </mat-card-content>
             </mat-card>
         </div>
+
     </div>
 </div>
 
 <br>
 <hr>
 <br>
-
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="12" [rowspan]="1">

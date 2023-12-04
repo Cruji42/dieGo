@@ -10,17 +10,15 @@
             <!-- <div> -->
                 <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
                 <mat-menu #menu="matMenu">
-                 <button mat-menu-item >Gestionar Eventos</button>
+                 <button mat-menu-item>Gestionar Eventos</button>
                   <hr>
-                  <button  mat-menu-item (click)="goToPage('profile')">Perfil</button>
+                  <button  mat-menu-item>Perfil</button>
                   <hr>
                   <button mat-menu-item>Eventos Guardados</button>
                   <hr>
                   <button mat-menu-item>Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
-                <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
-                <button  *ngIf="!flag" class="button_register" (click)="goToPage('register')"   mat-button>Registrarse</button>
 
         </div>
 
@@ -32,61 +30,57 @@
 <br>
 
 <div>
-    <div class="content_show-event">
-        <div class="div-event">
-            <mat-card  class="card_event">
-                <img class="img_card_event" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                <mat-card-content>
-                    <h2>{{event.title}}</h2>
-                    <h4>{{event.subtitle}}</h4>
+    <div class="title">
+        Eventos Guardados
+    </div> 
 
-                    <hr>
-
-                    <h5>Organizador </h5>
-                    <p>{{event.partner}}</p>
-
-                    <div class="title_hours">
-                        <h5 class="hour">Fecha de inicio</h5>
-                        <h5 class="hour">Fecha de termino</h5>
+    <div class="content_saved-events"*ngIf="events">
+        <div class="row" *ngFor="let e of events">
+            <mat-card class="info_card">
+                <mat-card-title>{{e.event_date |  date: 'dd'}}</mat-card-title>
+                <hr>
+                <mat-card-subtitle>{{e.event_date |  date: 'MMMM'}}</mat-card-subtitle>
+            </mat-card>
+    
+            <mat-card class="img_card">
+                <mat-card-content class="img_card_content">
+                    <div class="img_card_content_info">
+                        <h3><b>{{e.title}}</b></h3>
+                        <p class="hour-title">{{e.event_date | date: 'H'}}</p>
+                        <p>{{e.location}}</p>
+                        <span>{{e.description}}</span>
+                        <br>
+                        <span class="button_icons">
+                            <button  mat-raised-button (click)="copyText(e.event_id)"
+                              matTooltip="Copiar link para compartir"
+                             aria-label="Button that displays a tooltip when focused or hovered over">
+                                 <svg   xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#FF7100" class="bi bi-share-fill" viewBox="0 0 16 16">
+                                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
+                               </svg>
+                            </button>
+                            <button  mat-raised-button (click)="deleteToFavorite(e.event_id, e.title)"
+                              matTooltip="Eliminar Evento de favoritos"
+                             aria-label="Button that displays a tooltip when focused or hovered over">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#FF7100" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                              </svg>
+                        </button>
+                        </span>
                     </div>
-
-                    <div class="title_hours">
-                        <p class="hour">{{event.start_date | date: 'd'}} de {{event.start_date | date: 'MMMM'}}  {{event.start_date | date: 'YYYY'}}</p>
-                        <p class="hour">{{event.end_date | date: 'd'}} de {{event.end_date | date: 'MMMM'}}  {{event.end_date | date: 'YYYY'}}</p>
-                    </div>
-                   
-                   
-                    <div class="title_hours">
-                        <h5 class="hour">Hora inicio</h5>
-                        <h5 class="hour">Hora termino</h5>
-                    </div>
-                    <div class="title_hours">
-                        <p class="hour">{{event.start_date | date: 'hh:mm'}}</p>
-                        <p class="hour">{{event.end_date | date: 'hh:mm'}}</p>
-                    </div>
-
-                    <h5>Ubicacion</h5>
-                    <p><a href="event.location" target="_blank">{{event.location}}</a></p>
-
-                    <h5>Descripción</h5>
-                    <p>{{event.description}}</p>
+                    <img  mat-card-image src="assets/img/png/no-image.png">
                     
-                    <h5>Costo</h5>
-                    <p>${{event.price}}</p>
-
-                    <h5>Vestimenta</h5>
-                    <p>{{event.dress_code}}</p>
-
                 </mat-card-content>
+       
             </mat-card>
         </div>
     </div>
 </div>
-
+<br>
+<br>
 <br>
 <hr>
 <br>
-
+<br>
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="12" [rowspan]="1">
@@ -119,17 +113,10 @@
 <br>
 <hr>
 <br>
-
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="3" >
-            <div class="button button_es">
-                <button mat-button >Español</button>
-            </div>
-            <div class="button button_en">
-                <button mat-button >Ingles</button>
-            </div>
-        </mat-grid-tile>
+               </mat-grid-tile>
         <mat-grid-tile [colspan]="6" ></mat-grid-tile>
         <mat-grid-tile [colspan]="3" >
             <div>
@@ -138,4 +125,5 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
+
 

@@ -21,13 +21,6 @@ export class HomeComponent implements OnInit {
 
 
 
-  slides = [
-    {"image": "assets/img/png/no-image.png"},
-    {"image": "assets/img/png/no-image.png"},
-    {"image": "assets/img/png/no-image.png"}
-   ]
-
-
 
   
   async ngOnInit() {
@@ -76,11 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  goToLogin(){
-    location.href='login'
-  }
-
-  goToRegister(){
-    location.href='register'
+  goToPage(page){
+    location.href= page
   }
 }

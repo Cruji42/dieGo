@@ -52,6 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 5%;
 
  }
 
@@ -60,7 +61,7 @@
     height: 10%;
     text-align: center;
     margin-left: 10%;
-    background: #FFEBA3;
+    background: #FF7100;
  }
 
  .img_card{
@@ -81,7 +82,7 @@
 }
 
 .img_card_content img{
-    width: 50%;
+    width: 35%;
     margin: 0;
     height: 45vh;
     border-radius: 0.25rem;
@@ -114,11 +115,40 @@
 
 .button_icons{
     justify-content: center;
-    margin-left: 80%;    
+    margin-left: 55%;    
     margin-top: 20%;
+    position: relative;
+    bottom: -15vh;
 }
 .button_icons svg {
-    margin-left: 1%;
+    margin-left: 5%;
+
+}
+
+.button_icons button{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+}
+
+.img_card_content_info{
+    width: 60%;
+}
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
 
 }
 
