@@ -99,3 +99,20 @@
 .button_es{
     margin-left: 10%;
 }
+
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
+
+}

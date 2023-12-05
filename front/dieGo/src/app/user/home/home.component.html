@@ -4,19 +4,20 @@
         <span class="example-spacer"></span>
         <div class="menu">
             <a class="menu-item" href="home">Inicio</a>
-            <a *ngIf="flag"  class="menu-item" href="list-events">Explorar</a>
-            <a *ngIf="flag"  class="menu-item" href="add-events">Crear</a>
-            <a *ngIf="flag"  class="menu-item" href="contact">Contacto</a>
+            <a   class="menu-item" href="list-events">Explorar</a>
+            <a *ngIf="role !== 'visitor'"  class="menu-item" href="add-events">Crear</a>
             <!-- <div> -->
-                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
+                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">{{user?.name}}  {{user?.last_name}}</button>
                 <mat-menu #menu="matMenu">
-                 <button mat-menu-item >Gestionar Eventos</button>
+                 <button mat-menu-item *ngIf="role !== 'visitor'"  (click)="goToPage('list-organizer-events')" >Gestionar Eventos</button>
                   <hr>
                   <button  mat-menu-item (click)="goToPage('profile')">Perfil</button>
                   <hr>
-                  <button mat-menu-item>Eventos Guardados</button>
+                  <button  *ngIf="role === 'admin'" mat-menu-item (click)="goToPage('charts')">Panel de administración</button>
+                  <hr  *ngIf="role === 'admin'">
+                  <button mat-menu-item (click)="goToPage('list-favorite-events')">Eventos Guardados</button>
                   <hr>
-                  <button mat-menu-item>Cerrar Sesión</button>
+                  <button mat-menu-item (click)="logOn()">Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
                 <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
@@ -61,8 +62,8 @@
             <mat-grid-list cols="12" rowHeight="40vh">
                 <mat-grid-tile  [colspan]="5">
                     <mat-card class="info_card">
-                        <mat-card-subtitle>{{data.event_date}}</mat-card-subtitle>
-                        <mat-card-title>{{data.title}}</mat-card-title>
+                        <mat-card-subtitle>{{data?.event_date}}</mat-card-subtitle>
+                        <mat-card-title>{{data?.title}}</mat-card-title>
                         <br>
                         <mat-card-content>
                             <div>
@@ -131,17 +132,14 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>{{eventDataTen[0].title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[0].fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[0]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[0]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                        {{eventDataTen[0].description}}
+                        {{eventDataTen[0]?.description}}
                     </div>
                     <br>
-                    <div class="button">
-                        <button   mat-button>Explorar Eventos</button>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
@@ -149,17 +147,14 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>{{eventDataTen[1].title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[1].fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[1]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[1]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                        {{eventDataTen[1].description}}
+                        {{eventDataTen[1]?.description}}
                     </div>
                     <br>
-                    <div class="button">
-                        <button   mat-button>Explorar Eventos</button>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
@@ -167,17 +162,14 @@
             <mat-card class="event_card">
                 <img  mat-card-image src="assets/img/png/no-image.png">
                 
-                <mat-card-title>{{eventDataTen[2].title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[2].fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataTen[2]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataTen[2]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div>
-                        {{eventDataTen[2].description}}
+                        {{eventDataTen[2]?.description}}
                     </div>
                     <br>
-                    <div class="button">
-                        <button   mat-button>Explorar Eventos</button>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
@@ -193,9 +185,6 @@
                         {{eventDataTen[3].description}}
                     </div>
                     <br>
-                    <div class="button">
-                        <button   mat-button>Explorar Eventos</button>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
@@ -240,7 +229,7 @@
             <h1>Crea tu propio Evento</h1>
             <p>! Registrate como Organizador para acceder a esta funcion para publicar tus eventos y aí llegar a más gente!</p>
             <div class="button">
-            <button mat-button >
+            <button (click)="goToPage('add-events')" mat-button >
                 Crear
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>

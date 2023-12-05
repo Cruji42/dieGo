@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   totalEventsWeekly;
   totalUsers;
   totalEvents;
+  id_user;
+  user;
+  role;
+
   constructor(private cookieService: CookieService, private userService: UserService) { 
   
   }
@@ -25,6 +29,8 @@ export class HomeComponent implements OnInit {
   
   async ngOnInit() {
     this. token = this.cookieService.get('token');
+    this.id_user = this.cookieService.get("id");
+    this.role = this.cookieService.get('role')
     if(this.token){
       this.flag = true
       this.userService.getTopEvent(this.token).subscribe((data: any) => {
@@ -42,6 +48,8 @@ export class HomeComponent implements OnInit {
       this.userService.getTotalEvents(this.token).subscribe((data: any) => {
         this.totalEvents = data.total_events
       })
+
+      this.UserData();
     }else {
       this.flag = false
 
@@ -59,6 +67,7 @@ export class HomeComponent implements OnInit {
   
       this.userService.getPublicTotalEvents().subscribe((data: any) => {
         this.totalEvents = data.total_events
+
       })
 
       
@@ -71,5 +80,18 @@ export class HomeComponent implements OnInit {
 
   goToPage(page){
     location.href= page
+  }
+
+
+  UserData(){
+    this.userService.getDataUser(this.token,this.id_user).subscribe((data: any) => {
+      this.user = data;
+    })
+  }
+
+  logOn(){
+    this.cookieService.deleteAll();
+    localStorage.clear();
+    location.href = 'login'
   }
 }

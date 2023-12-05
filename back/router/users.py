@@ -39,6 +39,39 @@ def getUser(Authorization: Optional[str] = Header(None)):
         with engine.connect() as conn:
             result = conn.execute("select count(user_id) total_users from tbl_users").first()
             return result
+        
+@user.get("/byMonth", response_model=None, tags=["user"])
+def getUser(Authorization: Optional[str] = Header(None)):
+    if not validate(Authorization):
+        result = {"error":True, "message":"Not authentication"}
+        _status = status.HTTP_401_UNAUTHORIZED
+        return JSONResponse(status_code=_status, content=result)
+    else:
+        with engine.connect() as conn:
+            result = conn.execute("select count(user_id) total_users,  date_part('month', creation_date) mes from tbl_users where date_part('year', creation_date) = date_part('year', now())  group by date_part('month', creation_date) ").fetchall()
+            return result
+        
+@user.get("/femaleByMonth", response_model=None, tags=["user"])
+def getUser(Authorization: Optional[str] = Header(None)):
+    if not validate(Authorization):
+        result = {"error":True, "message":"Not authentication"}
+        _status = status.HTTP_401_UNAUTHORIZED
+        return JSONResponse(status_code=_status, content=result)
+    else:
+        with engine.connect() as conn:
+            result = conn.execute("select count(user_id) total_users,  date_part('month', creation_date) mes from tbl_users where (date_part('year', creation_date) = date_part('year', now()) and genre='F')  group by date_part('month', creation_date) ").fetchall()
+            return result
+        
+@user.get("/maleByMonth", response_model=None, tags=["user"])
+def getUser(Authorization: Optional[str] = Header(None)):
+    if not validate(Authorization):
+        result = {"error":True, "message":"Not authentication"}
+        _status = status.HTTP_401_UNAUTHORIZED
+        return JSONResponse(status_code=_status, content=result)
+    else:
+        with engine.connect() as conn:
+            result = conn.execute("select count(user_id) total_users,  date_part('month', creation_date) mes from tbl_users where (date_part('year', creation_date) = date_part('year', now()) and genre='M')  group by date_part('month', creation_date) ").fetchall()
+            return result
 
 @user.get("/{idUser}", response_model=None, tags=["user"])
 def getSingleUser(idUser: str, Authorization: Optional[str] = Header(None)):
@@ -118,7 +151,7 @@ def addUser(data_user: UserSchema, response: Response):
                     user_json = {"id":result[0]}
                     encoded_jwt = jwt.encode(user_json, "$126K4600a", algorithm="HS256")
                     response.set_cookie(key="token", value=encoded_jwt)
-                    result = {"error":False, "message" :"Loged", "token": encoded_jwt, "id": result[0]}
+                    result = {"error":False, "message" :"Loged", "token": encoded_jwt, "id": result[0], "role": result[8]}
                     return result
                 else:
                     message = "Password didn't match"

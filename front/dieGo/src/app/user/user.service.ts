@@ -101,4 +101,6 @@ export class UserService {
     let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
     return this.http.put(this.url_users + '/' + data.user_id, data, {headers: headers})
   }
+
+
 }

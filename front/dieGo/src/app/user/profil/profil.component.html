@@ -4,21 +4,24 @@
         <span class="example-spacer"></span>
         <div class="menu">
             <a class="menu-item" href="home">Inicio</a>
-            <a *ngIf="flag"  class="menu-item" href="list-events">Explorar</a>
-            <a *ngIf="flag"  class="menu-item" href="add-events">Crear</a>
-            <a *ngIf="flag"  class="menu-item" href="contact">Contacto</a>
+            <a   class="menu-item" href="list-events">Explorar</a>
+            <a *ngIf="role !== 'visitor'"  class="menu-item" href="add-events">Crear</a>
             <!-- <div> -->
-                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">Nombe de usuario</button>
+                <button  *ngIf="flag" class="button_register"  mat-button [matMenuTriggerFor]="menu">{{user?.name}}  {{user?.last_name}}</button>
                 <mat-menu #menu="matMenu">
-                 <button mat-menu-item>Gestionar Eventos</button>
+                 <button mat-menu-item *ngIf="role !== 'visitor'"  (click)="goToPage('list-organizer-events')" >Gestionar Eventos</button>
                   <hr>
-                  <button  mat-menu-item>Perfil</button>
+                  <button  mat-menu-item (click)="goToPage('profile')">Perfil</button>
                   <hr>
-                  <button mat-menu-item>Eventos Guardados</button>
+                  <button  *ngIf="role === 'admin'" mat-menu-item (click)="goToPage('charts')">Panel de administración</button>
+                  <hr  *ngIf="role === 'admin'">
+                  <button mat-menu-item (click)="goToPage('list-favorite-events')">Eventos Guardados</button>
                   <hr>
-                  <button mat-menu-item>Cerrar Sesión</button>
+                  <button mat-menu-item (click)="logOn()">Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
+                <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
+                <button  *ngIf="!flag" class="button_register" (click)="goToPage('register')"   mat-button>Registrarse</button>
 
         </div>
 
@@ -42,10 +45,10 @@
             </div>
             
             <div class="button">
-                <button   mat-button>Eventos Guardados</button>
+                <button  (click)="goToPage('list-favorite-events')" mat-button>Eventos Guardados</button>
             </div>
-            <div class="button">
-                <button  mat-button>Gestionar Eventos</button>
+            <div *ngIf="role !== 'visitor'" class="button">
+                <button  (click)="goToPage('list-organizer-events')" mat-button>Gestionar Eventos</button>
             </div>
         </div>
         <div class="div_form">
@@ -143,12 +146,6 @@
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="3" >
-            <div class="button button_es">
-                <button mat-button >Español</button>
-            </div>
-            <div class="button button_en">
-                <button mat-button >Ingles</button>
-            </div>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="6" ></mat-grid-tile>
         <mat-grid-tile [colspan]="3" >

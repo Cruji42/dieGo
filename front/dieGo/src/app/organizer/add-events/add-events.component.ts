@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { OrganizerService } from '../organizer.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-add-events',
@@ -15,8 +16,10 @@ export class AddEventsComponent implements OnInit {
   token;
   id_user;
   flag: boolean;
+  role;
+  user;
 
-  constructor( private organizerService: OrganizerService, private cookieService: CookieService, private _snackBar: MatSnackBar) { 
+  constructor( private organizerService: OrganizerService, private userService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { 
     this.eventForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       subtitle: new FormControl(null, [Validators.required]),
@@ -36,8 +39,29 @@ export class AddEventsComponent implements OnInit {
 
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
+    this.role = this.cookieService.get('role');
 
-    if(!this.token){ location.href= 'login';} else { this.flag = true}
+
+    if(!this.token || this.role === 'visitor' ){ location.href= 'home';} else { this.flag = true}
+    this.UserData()
+  }
+
+  
+
+  logOn(){
+    this.cookieService.deleteAll();
+    localStorage.clear();
+    location.href = 'login'
+  }
+
+  goToPage(page){
+    location.href= page
+  }
+
+  UserData(){
+    this.userService.getDataUser(this.token,this.id_user).subscribe((data: any) => {
+      this.user = data;
+    })
   }
 
 

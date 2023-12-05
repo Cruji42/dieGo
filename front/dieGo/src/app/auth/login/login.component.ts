@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
           if (data.message = "Loged"){
               document.cookie = " token=" + token
               document.cookie = " id=" + data.id
+              document.cookie = " role=" +data.role
              location.href = 'home';
           }
         }, error =>{

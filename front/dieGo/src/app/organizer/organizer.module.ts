@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ListOrganizerEventComponent } from './list-organizer-event/list-organizer-event.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { UserService } from '../user/user.service';
 
 
 
@@ -38,6 +39,6 @@ import { EditEventComponent } from './edit-event/edit-event.component';
     MatTooltipModule
 
   ],
-  providers: [ OrganizerService]
+  providers: [ OrganizerService, UserService]
 })
 export class OrganizerModule { }

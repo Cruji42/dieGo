@@ -1,0 +1,254 @@
+.admin-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+.sideBare{
+    width: 18vw;
+    padding: 1%;
+    background: linear-gradient(to bottom, #FF7100, #FEB737);
+    text-align: center;
+}
+
+.logo{
+    width: 20%;
+    border-radius: 0.5rem;
+}
+
+.user_content{
+    margin: 10% auto;
+    text-align: left;
+    width: 70%;
+    justify-content:space-evenly;   
+    display: flex;
+    position: absolute;
+    bottom: 2px
+    
+}
+.div_img_profile{
+    width: 10%;
+    margin-right: 20px;
+}
+.div_user_name{
+    width: 70%;
+    display : flex;
+    align-items : center;
+}
+.div_user_name h5{
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+.div_user_name h5 button{
+    margin: 0;
+    padding: 0;
+}
+.img_profile{
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+}
+.admin_content{
+    background-color: #FFFFFF;
+}
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
+
+}
+
+.mat-toolbar{
+    background-color: #FF7100;
+}
+mat-horizontal-stepper{
+    background: #FFFFFF !important;
+    color: #0a0a0a;
+}
+  
+ ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-label, .mat-step-header .mat-step-icon{
+    background-color: #FEB737 ; 
+ }
+
+ ::ng-deep  .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: transparent !important;
+    color: #FEB737;
+
+  }
+ 
+
+::ng-deep .mat-step-header .mat-step-label{
+    color: #FEB737 !important;
+  } 
+
+::n-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
+    background-color: #FEB737 ;  
+}
+
+.mat-toolbar{
+    background-color: #FF7100 ;
+}
+.img_nav{
+    width: 100px;
+    height: 50px;
+    margin-left: 5%;
+}
+.menu{
+    margin-left: 10%;
+    width: 35%;
+}
+.menu-item{
+    margin: 10%;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 75%;
+}
+.menu-item:hover {
+    text-decoration: underline;
+}
+.button_login{
+    margin-left: 15%;
+    border-radius: 2rem;
+    border: solid 2px #FFFFFF;
+    background-color: #FF7100;
+    color: #FFFFFF;
+}
+.button_register{
+    margin-left: 5%;
+    border-radius: 2rem;
+    border: solid 2px #FF7100;
+    background-color: #FFFFFF;
+    color: #FF7100;
+}
+.title{
+    left: 25px; 
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    font-size: 40px !important;
+    letter-spacing: 3px;
+ }
+
+ .content_saved-events{
+    width: 70vw;
+    margin: auto;
+ }
+
+ .row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 5%;
+    margin-bottom: 10%;
+
+ }
+
+ .info_card{
+    width: 7%;
+    height: 10%;
+    text-align: center;
+    margin-left: 10%;
+    background: #FF7100;
+ }
+
+ .img_card{
+
+    border-radius: 4px;
+    padding: 0;
+    background: #FFFFFF;
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 90%;
+    height: 45vh;
+
+ }
+
+.img_card_content{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+}
+
+.img_card_content img{
+    width: 35%;
+    margin: 0;
+    height: 45vh;
+    border-radius: 0.25rem;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex: auto;
+
+}
+.img_card_content div{
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #FF7100;
+    border-radius: 0.25rem;
+    color: #1f1f1f;
+    padding: 2%;
+}
+
+.hr-verticaly{
+    border:         none;
+    border-left:    1px solid hsla(200, 10%, 50%,100);
+    height:         100vh;
+    width:          1px;       
+
+}
+
+.hour-title{
+    color: #FF7100;
+}
+
+.button_icons{
+    justify-content: center;
+    margin-left: 65%;    
+    margin-top: 20%;
+    position: relative;
+    bottom: -15vh;
+}
+.button_icons svg {
+    margin-left: 5%;
+
+}
+
+.button_icons button{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+}
+
+.img_card_content_info{
+    width: 70%;
+}
+
+::ng-deep .mat-menu-content , .mat-menu-panel, .mat-menu-item {
+    background: #FFFFFF !important;
+    color: #FF7100 !important;
+}
+
+::ng-deep .mat-menu-item:hover{
+    background: #FF7100 !important;
+    color: #FFFFFF!important; 
+}
+
+::ng-deep .mat-list-text{
+    flex-direction: row !important;
+    justify-content: space-around;
+
+}
+
+
+

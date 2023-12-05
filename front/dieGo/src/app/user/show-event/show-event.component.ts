@@ -13,21 +13,31 @@ export class ShowEventComponent implements OnInit {
   id_user;
   flag: boolean;
   token;
-  id_event
-  event
+  id_event;
+  event;
+  role;
+  user;
 
-  constructor(private usersService: UserService, private cookieService: CookieService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private cookieService: CookieService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id_event = this.route.snapshot.paramMap.get('id');
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
+    this.role = this.cookieService.get('role')
     if(this.token) {
       this.flag = true;
       this.getEvenInfo();
+      this.UserData()
     } else{
       this.getPublicEvenInfo();
     }
+  }
+
+  UserData(){
+    this.userService.getDataUser(this.token,this.id_user).subscribe((data: any) => {
+      this.user = data;
+    })
   }
 
   goToPage(page){
@@ -35,17 +45,24 @@ export class ShowEventComponent implements OnInit {
   }
 
   getEvenInfo(){
-     this.usersService.getEvent(this.token, this.id_event).subscribe((data: any)=>{
+     this.userService.getEvent(this.token, this.id_event).subscribe((data: any)=>{
       this.event = data;
       console.log(data)
     })
   }
 
   getPublicEvenInfo(){
-    this.usersService.getPublicEvent(this.token, this.id_event).subscribe((data: any)=>{
+    this.userService.getPublicEvent(this.token, this.id_event).subscribe((data: any)=>{
      this.event = data;
      console.log(data)
    })
  }
+
+ 
+ logOn(){
+  this.cookieService.deleteAll();
+  localStorage.clear();
+  location.href = 'login'
+}
 
 }

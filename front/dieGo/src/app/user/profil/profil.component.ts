@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profil',
@@ -18,9 +19,10 @@ export class ProfilComponent implements OnInit {
   token;
   id_user;
   user;
+  role;
 
 
-  constructor(private cookieService: CookieService, private usersService: UserService) { 
+  constructor(private cookieService: CookieService, private usersService: UserService,private _snackBar: MatSnackBar) { 
 
 
   }
@@ -33,12 +35,13 @@ export class ProfilComponent implements OnInit {
 
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
+    this.role = this.cookieService.get('role')
 
    
     this.getDataUser();
    
 
-    if(!this.token){ location.href= 'login';} else { this.flag = true}
+    if(!this.token){ location.href= 'home';} else { this.flag = true}
   }
 
  getDataUser(){
@@ -58,6 +61,11 @@ export class ProfilComponent implements OnInit {
   })
  }
 
+ goToPage(page){
+  location.href= page
+}
+
+
  Editar(){
   let f = this.userForm.controls;
   let userData = {
@@ -76,11 +84,24 @@ export class ProfilComponent implements OnInit {
   this.usersService.editUserData(this.token, userData).subscribe((data: any)=> {
     if(!data.error){
       this.getDataUser();
+      this.openSnackBar('Editado correctamente')
     }
   })
  }
 
 
+ logOn(){
+  this.cookieService.deleteAll();
+  localStorage.clear();
+  location.href = 'login'
+}
+
+openSnackBar(label) {
+  this._snackBar.open(label, 'Cerrar', {
+    horizontalPosition: 'start',
+    verticalPosition: 'bottom',
+  });
+}
 
 
 }

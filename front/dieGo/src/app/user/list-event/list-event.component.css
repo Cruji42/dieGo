@@ -152,3 +152,21 @@
 
 }
 
+.img_footer{
+    width: 100px;
+    height: 50px;
+ }
+.footer_title{
+   
+    color: #FF7100;
+}
+
+.footer_title b{
+    text-decoration: underline;
+}
+
+.footer_title .social_svg{
+    margin-right: 20%;
+    margin-left: 20%;
+}
+

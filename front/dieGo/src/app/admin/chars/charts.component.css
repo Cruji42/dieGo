@@ -94,3 +94,9 @@ mat-horizontal-stepper{
     background-color: #FEB737 ;  
 }
 
+
+google-chart{
+    width: 100%;
+    height: 80vh;
+}
+
