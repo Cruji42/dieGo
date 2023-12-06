@@ -47,14 +47,12 @@ export class ShowEventComponent implements OnInit {
   getEvenInfo(){
      this.userService.getEvent(this.token, this.id_event).subscribe((data: any)=>{
       this.event = data;
-      console.log(data)
     })
   }
 
   getPublicEvenInfo(){
     this.userService.getPublicEvent(this.token, this.id_event).subscribe((data: any)=>{
      this.event = data;
-     console.log(data)
    })
  }
 

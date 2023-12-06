@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../user.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -77,6 +78,9 @@ export class HomeComponent implements OnInit {
 
   }
 
+  showEvent(id){
+    location.href= 'show-event/' + id
+  }
 
   goToPage(page){
     location.href= page

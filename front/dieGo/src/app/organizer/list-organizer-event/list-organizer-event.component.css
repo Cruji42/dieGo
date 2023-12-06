@@ -115,10 +115,12 @@
 
 .button_icons{
     justify-content: center;
-    margin-left: 55%;    
-    margin-top: 20%;
+    /* margin-left: 65%;    
+    margin-top: 20%; */
     position: relative;
-    bottom: -15vh;
+    bottom: -10%; 
+    left: 35%;
+    border: none !important;
 }
 .button_icons svg {
     margin-left: 5%;
@@ -169,5 +171,19 @@
 .footer_title .social_svg{
     margin-right: 20%;
     margin-left: 20%;
+}
+
+.cut-text{
+    border: none !important;
+    visibility: visible;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1rem;
+    max-height: 5rem;
+    height: 4rem;
+    display: -webkit-box;
+    overflow: hidden !important;
+    -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
 }
 

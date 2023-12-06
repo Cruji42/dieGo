@@ -1,6 +1,10 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <img class="img_nav" src="assets/img/png/no-image.png">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" img_nav bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
+            <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zm4-1v1h1v-1zm1 3v-1H4v1zm7 0v-1h-1v1zm-1-2h1v-1h-1zm-6 3H4v1h1zm7 1v-1h-1v1zm-7 1H4v1h1zm7 1v-1h-1v1zm-8 1v1h1v-1zm7 1h1v-1h-1z"/>
+          </svg>
+          <h3>DieGo</h3>
+        <!-- <img class="img_nav" src="assets/img/png/no-image.png"> -->
         <span class="example-spacer"></span>
         <div class="menu">
             <a class="menu-item" href="home">Inicio</a>
@@ -20,8 +24,8 @@
                   <button mat-menu-item (click)="logOn()">Cerrar Sesión</button>
                 </mat-menu>
             <!-- </div> -->
-                <button *ngIf="!flag" class="button_login" (click)="goToPage('login')"   mat-button>Iniciar Sesión</button>
-                <button  *ngIf="!flag" class="button_register" (click)="goToPage('register')"   mat-button>Registrarse</button>
+                <button *ngIf="!flag" class="button_login" (click)="goToPage('/login')"   mat-button>Iniciar Sesión</button>
+                <button  *ngIf="!flag" class="button_register" (click)="goToPage('/register')"   mat-button>Registrarse</button>
 
         </div>
 
@@ -62,23 +66,22 @@
             <mat-grid-list cols="12" rowHeight="40vh">
                 <mat-grid-tile  [colspan]="5">
                     <mat-card class="info_card">
-                        <mat-card-subtitle>{{data?.event_date}}</mat-card-subtitle>
+                        <mat-card-subtitle>{{data.start_date | date: 'dd'}}/{{data.start_date | date: 'M'}}/{{data.start_date | date: 'YYYY'}}</mat-card-subtitle>
                         <mat-card-title>{{data?.title}}</mat-card-title>
                         <br>
                         <mat-card-content>
                             <div>
                              {{data.description}}
                             </div>
-                            <br>
                             <div class="button">
-                                <button   mat-button>Explorar Eventos</button>
+                                <button (click)="goToPage('list-events')"  mat-button>Explorar Eventos</button>
                             </div>
                         </mat-card-content>
                     </mat-card>
                 </mat-grid-tile >
                 <mat-grid-tile [colspan]="7">
                     <mat-card class="img_card">
-                        <img  mat-card-image src="assets/img/png/no-image.png">
+                        <img  mat-card-image src={{data.image}}>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -101,13 +104,13 @@
         </mat-grid-tile>
         <mat-grid-tile class="sponsors"  [colspan]="10">
             <mat-card class="sponsors_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+                <img  mat-card-image src="https://www.diariodenavarra.es/uploads/2020/07/14/60b0413a7369b.jpeg">
             </mat-card>
             <mat-card class="sponsors_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+                <img  mat-card-image src="https://cloudfront-us-east-1.images.arcpublishing.com/sdpnoticias/OODSZOTPRZHNTNJF6Y2ZGL4SOQ.png">
             </mat-card>
             <mat-card class="sponsors_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+                <img  mat-card-image src="https://m.media-amazon.com/images/G/33/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_mx-main._CB468300557_.png">
             </mat-card>
 
         </mat-grid-tile>
@@ -129,14 +132,14 @@
     </div>
     <mat-grid-list class="event_grid" cols="12" rowHeight="20vh">
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card class="event_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+            <mat-card (click)="showEvent(eventDataTen[0].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataTen[0]?.image}}">
                 
                 <mat-card-title>{{eventDataTen[0]?.title}}</mat-card-title>
                 <mat-card-subtitle>{{eventDataTen[0]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
-                    <div>
+                    <div class="cut-text">
                         {{eventDataTen[0]?.description}}
                     </div>
                     <br>
@@ -144,8 +147,8 @@
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card class="event_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+            <mat-card (click)="showEvent(eventDataTen[1].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataTen[1]?.image}}">
                 
                 <mat-card-title>{{eventDataTen[1]?.title}}</mat-card-title>
                 <mat-card-subtitle>{{eventDataTen[1]?.fecha}}</mat-card-subtitle>
@@ -159,14 +162,14 @@
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card class="event_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+            <mat-card (click)="showEvent(eventDataTen[2].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataTen[2]?.image}}">
                 
                 <mat-card-title>{{eventDataTen[2]?.title}}</mat-card-title>
                 <mat-card-subtitle>{{eventDataTen[2]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
-                    <div>
+                    <div class="cut-text">
                         {{eventDataTen[2]?.description}}
                     </div>
                     <br>
@@ -174,14 +177,14 @@
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile style="width: 50vh;" [colspan]="3" [rowspan]="4">
-            <mat-card class="event_card">
-                <img  mat-card-image src="assets/img/png/no-image.png">
+            <mat-card (click)="showEvent(eventDataTen[3].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataTen[3]?.image}}">
                 
                 <mat-card-title>{{eventDataTen[3].title}}</mat-card-title>
                 <mat-card-subtitle>{{eventDataTen[3].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
-                    <div>
+                    <div class="cut-text">
                         {{eventDataTen[3].description}}
                     </div>
                     <br>
@@ -191,7 +194,7 @@
 
         <mat-grid-tile [colspan]="12" [rowspan]="1">
             <div class="button event_button">
-                <button   mat-button>Explorar más eventos</button>
+                <button (click)="goToPage('list-events')"   mat-button>Explorar más eventos</button>
             </div>
         </mat-grid-tile>
 
@@ -252,7 +255,12 @@
 <div>
     <mat-grid-list cols="12" rowHeight="10vh">
         <mat-grid-tile [colspan]="12" [rowspan]="1">
-            <img class="img_footer" src="assets/img/png/no-image.png">
+           <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FF7100" class=" img_nav bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
+                <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zm4-1v1h1v-1zm1 3v-1H4v1zm7 0v-1h-1v1zm-1-2h1v-1h-1zm-6 3H4v1h1zm7 1v-1h-1v1zm-7 1H4v1h1zm7 1v-1h-1v1zm-8 1v1h1v-1zm7 1h1v-1h-1z"/>
+            </svg>
+           </p>
+              <h1 class="footer_title">DieGo</h1>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="12" [rowspan]="1">
             <div class="footer_title" >

@@ -30,6 +30,7 @@ export class AddEventsComponent implements OnInit {
       price: new FormControl(null, [Validators.required]),
       start_date: new FormControl(null, [Validators.required]),
       end_date: new FormControl(null, [Validators.required]),
+      image: new FormControl(null,[Validators.required])
     });
   }
 
@@ -67,6 +68,7 @@ export class AddEventsComponent implements OnInit {
 
   createEvent(){
     let e = this.eventForm.controls;
+    console.log(e)
     let data_event = {
       title: e.title.value,
       subtitle: e.subtitle.value,
@@ -79,7 +81,7 @@ export class AddEventsComponent implements OnInit {
       end_date: e.end_date.value,
       event_date: e.start_date.value,
       disabled: false,
-      image: 'assets/img/png/no-image.png',
+      image: e.image.value,
       user_id: this.id_user
 
     }
@@ -90,7 +92,8 @@ export class AddEventsComponent implements OnInit {
          this.eventForm.reset();
       }
     }, error =>{
-      this.openSnackBar(error.error.message)
+      console.log(error)
+      // this.openSnackBar(error.error.message)
     }
     )
   }

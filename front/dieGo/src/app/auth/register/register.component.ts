@@ -70,4 +70,8 @@ export class RegisterComponent implements OnInit {
 
   
   }
+
+  goToPage(page){
+    location.href = page
+  }
 }

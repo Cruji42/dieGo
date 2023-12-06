@@ -70,4 +70,9 @@ export class LoginComponent implements OnInit {
    
   }
 
+
+  goToPage(page){
+    location.href = page
+  }
+
 }

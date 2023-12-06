@@ -55,5 +55,7 @@ export class AllEventsComponent implements OnInit {
     location.href= page
   }
 
-
+  showEvent(id){
+    location.href= 'show-event/' + id
+  }
 }

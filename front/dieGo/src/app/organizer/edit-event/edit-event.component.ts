@@ -49,6 +49,7 @@ export class EditEventComponent implements OnInit {
       price: new FormControl(this.event_data.price, [Validators.required]),
       start_date: new FormControl(this.event_data.start_date, [Validators.required]),
       end_date: new FormControl(this.event_data.end_date, [Validators.required]),
+      image: new FormControl(this.event_data.image,[Validators.required])
     });
     this.UserData()
 
@@ -75,7 +76,7 @@ export class EditEventComponent implements OnInit {
       end_date: e.end_date.value,
       event_date: e.start_date.value,
       disabled: false,
-      image: 'assets/img/png/no-image.png',
+      image: e.image.value,
       user_id: this.id_user
 
     }

@@ -1,7 +1,10 @@
 
 <mat-drawer-container class="admin-container">
     <mat-drawer mode="side" class="sideBare" opened>
-        <h2><img class="logo" src="assets/img/png/no-image.png" alt=""></h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" img_nav bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
+            <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zm4-1v1h1v-1zm1 3v-1H4v1zm7 0v-1h-1v1zm-1-2h1v-1h-1zm-6 3H4v1h1zm7 1v-1h-1v1zm-7 1H4v1h1zm7 1v-1h-1v1zm-8 1v1h1v-1zm7 1h1v-1h-1z"/>
+          </svg>
+          <h3>DieGo</h3>
         <hr>
         <div>
             <br>
@@ -55,21 +58,16 @@
         <div>
             <div class="content_saved-events"*ngIf="events">
                 <div (click)="showEvent(e.event_id)" class="row" *ngFor="let e of events">
-                    <!-- <mat-card class="info_card">
-                        <mat-card-title>{{e.event_date |  date: 'dd'}}</mat-card-title>
-                        <hr>
-                        <mat-card-subtitle>{{e.event_date |  date: 'MMMM'}}</mat-card-subtitle>
-                    </mat-card> -->
+
             
                     <mat-card class="img_card">
                         <mat-card-content class="img_card_content">
                             <div class="img_card_content_info">
                                 <h3><b>{{e.title}}</b></h3>
                                 <p class="hour-title"> Hora : {{e.event_date | date: 'H:mm'}}</p>
-                                <p>{{e.location}}</p>
-                                <span>{{e.description}}</span>
-                                <br>
-                                <span class="button_icons">
+                                <p><a href="{{e.location}}" target="_blank">Ubicación</a></p>
+                                <div class="cut-text">{{e.description}}</div>
+                                <div class="button_icons">
         
                                     <button  mat-raised-button (click)="copyText(e.event_id)"
                                       matTooltip="Copiar link para compartir"
@@ -78,10 +76,19 @@
                                             <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
                                        </svg>
                                     </button>
+
+                                    <button mat-raised-button (click)="showEvent(e.event_id)"
+                                    matTooltip="Copiar link para compartir"
+                                   aria-label="Button that displays a tooltip when focused or hovered over">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#FF7100" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                          </svg>
+                                    </button>
                                     
-                                </span>
+                                </div>
                             </div>
-                            <img  mat-card-image src="assets/img/png/no-image.png">
+                            <img  mat-card-image src="{{e.image}}">
                             
                         </mat-card-content>
                
