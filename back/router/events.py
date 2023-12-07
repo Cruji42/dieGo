@@ -59,7 +59,7 @@ def getUser(Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            result = conn.execute("select count(event_id) total_events from tbl_events where disabled == false").first()
+            result = conn.execute("select count(event_id) total_events from tbl_events where disabled = false").first()
             
             return result
 
