@@ -97,12 +97,12 @@ export class EditEventComponent implements OnInit {
     goToPage(page){
       location.href= page
     }
-
     logOn(){
       this.cookieService.deleteAll();
+      this.cookieService.deleteAll('token', '/');
+    
       localStorage.clear();
       location.href = 'login'
     }
-  
 
 }

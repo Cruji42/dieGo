@@ -59,7 +59,7 @@ def getUser(Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            result = conn.execute("select count(event_id) total_events from tbl_events").first()
+            result = conn.execute("select count(event_id) total_events from tbl_events where disabled == false").first()
             
             return result
 
@@ -121,7 +121,7 @@ def getUser(Authorization: Optional[str] = Header(None)):
 @router_events.get("/public/top10", response_model=List[EventSchema], tags=["events"])
 def getEvent(Authorization: Optional[str] = Header(None)):
         with engine.connect() as conn:
-            result = conn.execute(tbl_events.select().order_by(tbl_events.c.creation_time.desc()).limit(10)).fetchall()
+            result = conn.execute(tbl_events.select().where(tbl_events.c.disabled == False) .order_by(tbl_events.c.creation_time.desc()).limit(10)).fetchall()
             return result
 
 
@@ -134,7 +134,7 @@ def getEvent(Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            result = conn.execute(tbl_events.select().order_by(tbl_events.c.creation_time.desc()).limit(10)).fetchall()
+            result = conn.execute(tbl_events.select().where(tbl_events.c.disabled == False).order_by(tbl_events.c.creation_time.desc()).limit(10)).fetchall()
             return result
 
 
@@ -146,7 +146,7 @@ def getEvent(Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id) desc limit 5)"
+            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id)  desc limit 5) and disabled == false"
             result = conn.execute(query).fetchall()
             return result
 
@@ -158,7 +158,7 @@ def getEvent(Authorization: Optional[str] = Header(None)):
             return JSONResponse(status_code=_status, content=result)
         else:
             with engine.connect() as conn:
-                query = f"SELECT count(e.event_id) total, string_agg(e.title, ', ') title from public.tbl_events as e INNER JOIN  tbl_events_saved as es on e.event_id = es.tbl_event_id group by es.tbl_event_id order by total desc limit 5"
+                query = f"  "
                 result = conn.execute(query).fetchall()
                 return result
 
@@ -204,7 +204,7 @@ def getEventByUser(idUser: int, Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_events_id FROM public.tbl_events_created where tbl_users_id = {idUser}) and tbl_events.disabled=false"
+                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_events_id FROM public.tbl_events_created where tbl_users_id = {idUser}) and disabled=false"
                 result = conn.execute(query).fetchall()
             
                 print("Result from DB", result)
@@ -224,7 +224,7 @@ def getSAvedEventByUser(idUser: int, Authorization: Optional[str] = Header(None)
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved where tbl_user_id = {idUser}) order by event_date desc"
+                query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved where tbl_user_id = {idUser}) and disabled=false order by event_date desc"
                 result = conn.execute(query).fetchall()
             
                 print("Result from DB", result)

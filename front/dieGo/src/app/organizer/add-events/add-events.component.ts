@@ -51,6 +51,8 @@ export class AddEventsComponent implements OnInit {
 
   logOn(){
     this.cookieService.deleteAll();
+    this.cookieService.deleteAll('token', '/');
+  
     localStorage.clear();
     location.href = 'login'
   }

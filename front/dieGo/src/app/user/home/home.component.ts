@@ -79,7 +79,8 @@ export class HomeComponent implements OnInit {
   }
 
   showEvent(id){
-    location.href= 'show-event/' + id
+    localStorage.setItem('id_event', id);
+    location.href= 'show-event'
   }
 
   goToPage(page){
@@ -95,6 +96,8 @@ export class HomeComponent implements OnInit {
 
   logOn(){
     this.cookieService.deleteAll();
+    this.cookieService.deleteAll('token', '/');
+  
     localStorage.clear();
     location.href = 'login'
   }

@@ -42,10 +42,10 @@
     <div class="content_contact">
         <div class="div_uno">
             
-            <div class="div_img">
+            <!-- <div class="div_img">
                 <img  class="img_form" src="assets/img/png/no-image.png" alt="">
                 <p>Imagen</p>
-            </div>
+            </div> -->
             
             <div class="button">
                 <button  (click)="goToPage('list-favorite-events')" mat-button>Eventos Guardados</button>
@@ -95,8 +95,8 @@
 
                       
                         
-                        <div class="button">
-                            <button [disabled]="userForm.status === 'INVALID'"  type="submit" (click)="Editar()" mat-button>Editar</button>
+                        <div class="button_save">
+                            <button [disabled]="userForm.status === 'INVALID'"  type="submit" (click)="Editar()" mat-button>Guardar</button>
                         </div>
                     </form> 
     

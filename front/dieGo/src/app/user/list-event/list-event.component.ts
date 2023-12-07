@@ -55,6 +55,8 @@ export class ListEventComponent implements OnInit {
   
   logOn(){
     this.cookieService.deleteAll();
+    this.cookieService.deleteAll('token', '/');
+  
     localStorage.clear();
     location.href = 'login'
   }
@@ -91,9 +93,10 @@ export class ListEventComponent implements OnInit {
       });
     }
 
-  showEvent(id){
-    location.href= 'show-event/' + id
-  }
+    showEvent(id){
+      localStorage.setItem('id_event', id);
+      location.href= 'show-event'
+    }
 
   
   UserData(){

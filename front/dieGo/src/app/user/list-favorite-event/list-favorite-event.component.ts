@@ -102,11 +102,14 @@ export class ListFavoriteEventComponent implements OnInit {
 
     logOn(){
       this.cookieService.deleteAll();
+      this.cookieService.deleteAll('token', '/');
+    
       localStorage.clear();
       location.href = 'login'
     }
 
     showEvent(id){
-      location.href= 'show-event/' + id
+      localStorage.setItem('id_event', id);
+      location.href= 'show-event'
     }
 }

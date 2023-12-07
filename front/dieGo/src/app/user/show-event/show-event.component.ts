@@ -21,7 +21,7 @@ export class ShowEventComponent implements OnInit {
   constructor(private userService: UserService, private cookieService: CookieService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id_event = this.route.snapshot.paramMap.get('id');
+    this.id_event = localStorage.getItem('id_event')
     this.token = this.cookieService.get('token');
     this.id_user = this.cookieService.get("id");
     this.role = this.cookieService.get('role')
@@ -59,6 +59,8 @@ export class ShowEventComponent implements OnInit {
  
  logOn(){
   this.cookieService.deleteAll();
+  this.cookieService.deleteAll('token', '/');
+
   localStorage.clear();
   location.href = 'login'
 }

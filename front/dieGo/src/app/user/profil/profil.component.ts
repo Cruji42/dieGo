@@ -73,7 +73,7 @@ export class ProfilComponent implements OnInit {
     name: f.name.value,
     last_name: f.last_name.value,
     email: this.user.email,
-    password: this.user.email,
+    password: this.user.password,
     birth_day: f.birth_day.value,
     genre: f.genre.value,
     disable: false,
@@ -92,6 +92,8 @@ export class ProfilComponent implements OnInit {
 
  logOn(){
   this.cookieService.deleteAll();
+  this.cookieService.deleteAll('token', '/');
+
   localStorage.clear();
   location.href = 'login'
 }
