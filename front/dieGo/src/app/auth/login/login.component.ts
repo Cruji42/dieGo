@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this. token = this.cookieService.get('token');
+    this. token = this.cookieService.get('token_log');
     if(this.token) location.href ='home'
 
   }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
           console.log(data.token);
           let token = data.token;
           if (data.message = "Loged"){
-              document.cookie = " token=" + token
+              document.cookie = " token_log=" + token
               document.cookie = " id=" + data.id
               document.cookie = " role=" +data.role
              location.href = 'home';

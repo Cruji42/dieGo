@@ -23,7 +23,7 @@ export class ListEventComponent implements OnInit {
   constructor(private userService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.token = this.cookieService.get('token');
+    this.token = this.cookieService.get('token_log');
     this.id_user = this.cookieService.get("id");
     this.role = this.cookieService.get('role')
 

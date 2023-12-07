@@ -16,7 +16,7 @@ export class WelcomeComponent implements OnInit {
   constructor( private authService: AuthService, public dialog: MatDialog, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this. token = this.cookieService.get('token');
+    this. token = this.cookieService.get('token_log');
     if(this.token) location.href ='home'
   }
 
@@ -53,7 +53,7 @@ export class WelcomeComponent implements OnInit {
           console.log(res.token);
           let token = res.token;
           if (res.message = "Loged"){
-              document.cookie = " token=" + token
+              document.cookie = " token_log=" + token
               document.cookie = " id=" + data.id
               document.cookie = " role=" +data.role
               localStorage.removeItem('userData');

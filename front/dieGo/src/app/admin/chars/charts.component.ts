@@ -110,7 +110,7 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.token = this.cookieService.get('token');
+    this.token = this.cookieService.get('token_log');
     this.role = this.cookieService.get('role')
     this.id_user = this.cookieService.get("id");
     if(!this.token || this.role !== 'admin' ){ location.href= 'home';} 

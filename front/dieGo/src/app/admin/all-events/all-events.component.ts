@@ -19,7 +19,7 @@ export class AllEventsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.token = this.cookieService.get('token');
+    this.token = this.cookieService.get('token_log');
     this.role = this.cookieService.get('role')
     this.id_user = this.cookieService.get("id");
 

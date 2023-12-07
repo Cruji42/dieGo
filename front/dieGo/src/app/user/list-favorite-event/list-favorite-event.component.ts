@@ -22,7 +22,7 @@ export class ListFavoriteEventComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.token = this.cookieService.get('token');
+    this.token = this.cookieService.get('token_log');
     this.id_user = this.cookieService.get("id");
     this.role = this.cookieService.get('role')
 

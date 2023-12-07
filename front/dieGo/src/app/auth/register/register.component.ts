@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this. token = this.cookieService.get('token');
+    this. token = this.cookieService.get('token_log');
     if(this.token) location.href ='home'
     
   }
