@@ -175,12 +175,12 @@ def update_user(data_user: UserSchema, idUser: str, Authorization: Optional[str]
         with engine.connect() as conn:
             try:
                 #Encrypt password using bcrypt
-                passwd = data_user.password
+                #passwd = data_user.password
                 #salt = bcrypt.gensalt()
-                hashed = bcrypt.hashpw(passwd.encode('utf8'), bcrypt.gensalt())
-                hashed = hashed.decode('utf8')
-                data_user.password = hashed
-                conn.execute(users.update().values(name= data_user.name, last_name= data_user.last_name, email= data_user.email, password= data_user.password, birth_day= data_user.birth_day, genre= data_user.genre, disabled= data_user.disabled, role= data_user.role, phone_number= data_user.phone_number, picture= data_user.picture).where(users.c.user_id == idUser))
+                #hashed = bcrypt.hashpw(passwd.encode('utf8'), bcrypt.gensalt())
+                #hashed = hashed.decode('utf8')
+                #data_user.password = hashed
+                conn.execute(users.update().values(name= data_user.name, last_name= data_user.last_name, email= data_user.email, birth_day= data_user.birth_day, genre= data_user.genre, disabled= data_user.disabled, role= data_user.role, phone_number= data_user.phone_number, picture= data_user.picture).where(users.c.user_id == idUser))
             
                 result = conn.execute(users.select().where(users.c.user_id == idUser)).first() 
     

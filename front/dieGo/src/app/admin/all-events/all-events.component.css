@@ -219,10 +219,11 @@ mat-horizontal-stepper{
     bottom: -10%; 
     left: 70%;
     border: none !important;
+    
 }
 .button_icons svg {
     margin-left: 5%;
-
+    margin-bottom: 5%;
 }
 
 .button_icons button{

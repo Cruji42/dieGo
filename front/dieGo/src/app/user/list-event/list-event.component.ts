@@ -94,8 +94,8 @@ export class ListEventComponent implements OnInit {
     }
 
     showEvent(id){
-      localStorage.setItem('id_event', id);
-      location.href= 'show-event'
+      // localStorage.setItem('id_event', id);
+      location.href= 'show-event/'+id
     }
 
   

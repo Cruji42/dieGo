@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/user/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-all-events',
@@ -14,8 +15,9 @@ export class AllEventsComponent implements OnInit {
   user;
   id_user;
   role;
+  copy: boolean;
 
-  constructor(private adminService: AdminService, private userService: UserService, private cookieService: CookieService) { }
+  constructor(private adminService: AdminService, private userService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -33,7 +35,6 @@ export class AllEventsComponent implements OnInit {
 
   getEvents(){
     this.adminService.getAllEvents(this.token).subscribe((data: any) => {
-      console.log(data)
       this.events = data;
     })
   }
@@ -44,6 +45,37 @@ export class AllEventsComponent implements OnInit {
     })
   }
 
+
+  copyText(id){
+    let url = location.origin
+    console.log(url);
+    let val = url + '/show-event/' + id;
+    console.log(val);
+    let selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = val;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+      this.copy = true;
+      this.openSnackBar('Link copiado');
+      setTimeout(()=>{
+        this.copy = false;
+      }, 2000)
+    }
+
+
+    openSnackBar(label) {
+      this._snackBar.open(label, 'Cerrar', {
+        horizontalPosition: 'start',
+        verticalPosition: 'bottom',
+      });
+    }
 
   logOn(){
     this.cookieService.deleteAll();
@@ -58,7 +90,7 @@ export class AllEventsComponent implements OnInit {
   }
 
   showEvent(id){
-    localStorage.setItem('id_event', id);
-    location.href= 'show-event'
+    // localStorage.setItem('id_event', id);
+    location.href= 'show-event/'+id
   }
 }

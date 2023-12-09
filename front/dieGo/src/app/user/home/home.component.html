@@ -3,7 +3,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" img_nav bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zm4-1v1h1v-1zm1 3v-1H4v1zm7 0v-1h-1v1zm-1-2h1v-1h-1zm-6 3H4v1h1zm7 1v-1h-1v1zm-7 1H4v1h1zm7 1v-1h-1v1zm-8 1v1h1v-1zm7 1h1v-1h-1z"/>
           </svg>
-          <h3>DieGo</h3>
+          <h3>Eventos SMA</h3>
         <!-- <img class="img_nav" src="assets/img/png/no-image.png"> -->
         <span class="example-spacer"></span>
         <div class="menu">
@@ -63,16 +63,17 @@
       >
       <mat-carousel-content>
         <mat-card-content>
-            <mat-grid-list cols="12" rowHeight="40vh">
+            <mat-grid-list cols="12" rowHeight="80vh">
                 <mat-grid-tile  [colspan]="5">
                     <mat-card class="info_card">
                         <mat-card-subtitle>{{data.start_date | date: 'dd'}}/{{data.start_date | date: 'M'}}/{{data.start_date | date: 'YYYY'}}</mat-card-subtitle>
                         <mat-card-title>{{data?.title}}</mat-card-title>
                         <br>
                         <mat-card-content>
-                            <div>
+                            <div class="cut-text">
                              {{data.description}}
                             </div>
+                            <br>
                             <div class="button">
                                 <button (click)="goToPage('list-events')"  mat-button>Explorar Eventos</button>
                             </div>
@@ -154,7 +155,7 @@
                 <mat-card-subtitle>{{eventDataTen[1]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
-                    <div>
+                    <div class="cut-text">
                         {{eventDataTen[1]?.description}}
                     </div>
                     <br>
@@ -241,7 +242,7 @@
             </div>
         </div> 
         <div class="event_create_content_img">
-            <img  src="assets/img/png/no-image.png">
+            <img  src="https://aldialogo.mx/wp-content/uploads/2022/04/Continu%CC%81a-revisio%CC%81n-a-normativa-de-eventos-masivos-en-Quere%CC%81taro.jpg">
         </div>
     </div>
 
@@ -260,7 +261,7 @@
                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zm4-1v1h1v-1zm1 3v-1H4v1zm7 0v-1h-1v1zm-1-2h1v-1h-1zm-6 3H4v1h1zm7 1v-1h-1v1zm-7 1H4v1h1zm7 1v-1h-1v1zm-8 1v1h1v-1zm7 1h1v-1h-1z"/>
             </svg>
            </p>
-              <h1 class="footer_title">DieGo</h1>
+              <h1 class="footer_title">Eventos SMA</h1>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="12" [rowspan]="1">
             <div class="footer_title" >

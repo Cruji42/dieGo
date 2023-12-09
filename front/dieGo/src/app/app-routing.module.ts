@@ -24,7 +24,7 @@ const routes: Routes = [
    { path: 'contact', component: ContactComponent},
    { path: 'profile', component: ProfilComponent},
    { path: 'add-events', component: AddEventsComponent},
-   { path: 'show-event', component: ShowEventComponent},
+   { path: 'show-event/:id', component: ShowEventComponent},
    { path: 'charts', component: ChartsComponent},
    { path: 'list-events', component: ListEventComponent},
    { path: 'list-favorite-events', component: ListFavoriteEventComponent},

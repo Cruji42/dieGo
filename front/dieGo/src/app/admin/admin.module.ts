@@ -14,6 +14,7 @@ import { ChartsModule } from 'ng2-charts';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { AdminService } from './admin.service';
 import { UserService } from '../user/user.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -36,6 +37,7 @@ import { UserService } from '../user/user.service';
     NgApexchartsModule,
     ChartsModule,
     GoogleChartsModule,
+    MatTooltipModule
   ],
   providers: [
     AdminService,

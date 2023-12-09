@@ -95,9 +95,9 @@ mat-card img {
 }
 
  .sponsors_card{
-    margin-right: 3%;
-    height: 25%;
-     width: 30%;
+    margin-left: 5%;
+    height: 45%;
+     width: 25%;
      border-radius: 0.25rem;  
  }
 
@@ -141,7 +141,7 @@ mat-card img {
 }
 
 .event_data{
-    margin: 5%;
+    margin: 15%;
     width: 100%;
     height: 60%;
     background: #FFFFFF;
@@ -297,4 +297,8 @@ mat-card img {
     display: -webkit-box;
     overflow: hidden !important;
     -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+}
+
+::ng-deep .carousel{
+    height: 80vh !important;
 }

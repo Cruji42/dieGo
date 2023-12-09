@@ -54,8 +54,8 @@ export class WelcomeComponent implements OnInit {
           let token = res.token;
           if (res.message = "Loged"){
               document.cookie = " token_log=" + token
-              document.cookie = " id=" + data.id
-              document.cookie = " role=" +data.role
+              document.cookie = " id=" + res.id
+              document.cookie = " role=" + res.role
               localStorage.removeItem('userData');
              location.href = 'home';
           }

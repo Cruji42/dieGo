@@ -146,7 +146,7 @@ def getEvent(Authorization: Optional[str] = Header(None)):
         return JSONResponse(status_code=_status, content=result)
     else:
         with engine.connect() as conn:
-            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id)  desc limit 5) and disabled == false"
+            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id)  desc limit 5) and disabled = false"
             result = conn.execute(query).fetchall()
             return result
 
@@ -158,7 +158,7 @@ def getEvent(Authorization: Optional[str] = Header(None)):
             return JSONResponse(status_code=_status, content=result)
         else:
             with engine.connect() as conn:
-                query = f"  "
+                query = f"SELECT count(e.event_id) total, string_agg(e.title, ', ') title from public.tbl_events as e INNER JOIN  tbl_events_saved as es on e.event_id = es.tbl_event_id and disabled = false group by es.tbl_event_id order by total desc limit 5"
                 result = conn.execute(query).fetchall()
                 return result
 
