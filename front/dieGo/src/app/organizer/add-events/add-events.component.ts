@@ -4,6 +4,8 @@ import { OrganizerService } from '../organizer.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorComponent } from '../../auth/error/error.component';
 
 @Component({
   selector: 'app-add-events',
@@ -19,7 +21,7 @@ export class AddEventsComponent implements OnInit {
   role;
   user;
 
-  constructor( private organizerService: OrganizerService, private userService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { 
+  constructor(public dialog: MatDialog, private organizerService: OrganizerService, private userService: UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) { 
     this.eventForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       subtitle: new FormControl(null, [Validators.required]),
@@ -94,10 +96,20 @@ export class AddEventsComponent implements OnInit {
          this.eventForm.reset();
       }
     }, error =>{
-      console.log(error)
-      // this.openSnackBar(error.error.message)
+        this.openErrorDialog('Ocurrio un error. Favor de intentarlo más tarde')
+        console.log(error)
+
     }
     )
+  }
+
+
+  openErrorDialog( info): void {
+    const dialogRef = this.dialog.open(ErrorComponent, {data: {message: info}});
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
 

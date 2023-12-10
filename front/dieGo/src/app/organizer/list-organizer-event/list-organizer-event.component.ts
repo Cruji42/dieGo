@@ -74,7 +74,7 @@ export class ListOrganizerEventComponent implements OnInit {
   copyText(id){
     let url = location.origin
     console.log(url);
-    let val = url + '/dieGO/show-event/' + id;
+    let val = url + '/dieGo/show-event/' + id;
     console.log(val);
     let selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';

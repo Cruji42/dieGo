@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorComponent } from '../../auth/error/error.component';
+
 
 @Component({
   selector: 'app-profil',
@@ -22,7 +25,7 @@ export class ProfilComponent implements OnInit {
   role;
 
 
-  constructor(private cookieService: CookieService, private usersService: UserService,private _snackBar: MatSnackBar) { 
+  constructor(public dialog: MatDialog, private cookieService: CookieService, private usersService: UserService,private _snackBar: MatSnackBar) { 
 
 
   }
@@ -74,7 +77,7 @@ export class ProfilComponent implements OnInit {
     last_name: f.last_name.value,
     email: this.user.email,
     password: this.user.password,
-    birth_day: f.birth_day.value,
+    birth_day: "",
     genre: f.genre.value,
     disable: false,
     phone_number: f.phone_number.value,
@@ -86,8 +89,19 @@ export class ProfilComponent implements OnInit {
       this.getDataUser();
       this.openSnackBar('Editado correctamente')
     }
+  }, error => {
+    this.openErrorDialog('Ocurrio un error. Favor de intentarlo más tarde')
+    console.log(error)
   })
  }
+
+ openErrorDialog( info): void {
+  const dialogRef = this.dialog.open(ErrorComponent, {data: {message: info}});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(result);
+  });
+}
 
 
  logOn(){

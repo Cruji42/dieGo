@@ -4,6 +4,8 @@ import { OrganizerService } from '../organizer.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorComponent } from '../../auth/error/error.component';
 
 @Component({
   selector: 'app-edit-event',
@@ -20,7 +22,7 @@ export class EditEventComponent implements OnInit {
   role;
   user;
 
-  constructor(private organizerService: OrganizerService, private userService:UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private organizerService: OrganizerService, private userService:UserService, private cookieService: CookieService, private _snackBar: MatSnackBar) {
  
    }
 
@@ -85,8 +87,21 @@ export class EditEventComponent implements OnInit {
         localStorage.removeItem('edit_event_data')
         location.href='list-organizer-events';
       }
-    })
+    }, error =>{
+      this.openErrorDialog('Ocurrio un error. Favor de intentarlo más tarde')
+      console.log(error)
+    }
+    )
 
+    }
+
+
+    openErrorDialog( info): void {
+      const dialogRef = this.dialog.open(ErrorComponent, {data: {message: info}});
+    
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+      });
     }
 
     Cancel(){
