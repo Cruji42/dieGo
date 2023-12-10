@@ -77,7 +77,7 @@ export class ProfilComponent implements OnInit {
     last_name: f.last_name.value,
     email: this.user.email,
     password: this.user.password,
-    birth_day: "",
+    birth_day: f.birth_day.value,
     genre: f.genre.value,
     disable: false,
     phone_number: f.phone_number.value,
