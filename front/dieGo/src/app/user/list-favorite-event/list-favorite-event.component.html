@@ -41,7 +41,7 @@
     </div> 
 
     <div class="content_saved-events"*ngIf="events">
-        <div class="row" (click)="showEvent(e.event_id)" *ngFor="let e of events">
+        <div class="row"  *ngFor="let e of events">
             <mat-card class="info_card">
                 <mat-card-title>{{e.event_date |  date: 'dd'}}</mat-card-title>
                 <hr>
