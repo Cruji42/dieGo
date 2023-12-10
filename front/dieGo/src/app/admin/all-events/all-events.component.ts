@@ -47,9 +47,9 @@ export class AllEventsComponent implements OnInit {
 
 
   copyText(id){
-    let url = location.origin
+    let url = location
     console.log(url);
-    let val = url + '/show-event/' + id;
+    let val = url + '/dieGO/show-event/' + id;
     console.log(val);
     let selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';
@@ -90,7 +90,8 @@ export class AllEventsComponent implements OnInit {
   }
 
   showEvent(id){
-    // localStorage.setItem('id_event', id);
+
+    console.log(location);
     location.href= 'show-event/'+id
   }
 }
