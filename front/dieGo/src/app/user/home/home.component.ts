@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   totalEventsWeekly;
   totalUsers;
   totalEvents;
+  eventDataFive =[];
   id_user;
   user;
   role;
@@ -49,6 +50,10 @@ export class HomeComponent implements OnInit {
       this.userService.getTotalEvents(this.token).subscribe((data: any) => {
         this.totalEvents = data.total_events
       })
+      
+      this.userService.getTop5Event(this.token).subscribe((data:any) => {
+        this.eventDataFive = data
+      })
 
       this.UserData();
     }else {
@@ -69,6 +74,10 @@ export class HomeComponent implements OnInit {
       this.userService.getPublicTotalEvents().subscribe((data: any) => {
         this.totalEvents = data.total_events
 
+      })
+
+      this.userService.getPublicTop5Event().subscribe((data:any) => {
+        this.eventDataFive = data
       })
 
       

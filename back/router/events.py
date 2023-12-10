@@ -138,7 +138,14 @@ def getEvent(Authorization: Optional[str] = Header(None)):
             return result
 
 
-@router_events.get("/top5", response_model=List[EventSchema], tags=["events"])
+@router_events.get("/public/top5", response_model=None, tags=["events"])
+def getEvent(Authorization: Optional[str] = Header(None)):
+        with engine.connect() as conn:
+            query = f"SELECT * FROM tbl_events WHERE event_id in (SELECT tbl_event_id FROM public.tbl_events_saved group by tbl_event_id order by count(tbl_event_id)  desc limit 5) and disabled = false"
+            result = conn.execute(query).fetchall()
+            return result
+
+@router_events.get("/top5", response_model=None, tags=["events"])
 def getEvent(Authorization: Optional[str] = Header(None)):
     if not validate(Authorization):
         result = {"error":True, "message":"Not authentication"}

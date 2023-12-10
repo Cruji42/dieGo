@@ -66,12 +66,13 @@
             <mat-grid-list cols="12" rowHeight="80vh">
                 <mat-grid-tile  [colspan]="5">
                     <mat-card class="info_card">
-                        <mat-card-subtitle>{{data.start_date | date: 'dd'}}/{{data.start_date | date: 'M'}}/{{data.start_date | date: 'YYYY'}}</mat-card-subtitle>
+                        <span style="color: white;">eventDataTen[0].title</span>
+                        <mat-card-subtitle>{{data?.start_date | date: 'dd'}}/{{data?.start_date | date: 'M'}}/{{data?.start_date | date: 'YYYY'}}</mat-card-subtitle>
                         <mat-card-title>{{data?.title}}</mat-card-title>
                         <br>
                         <mat-card-content>
                             <div class="cut-text">
-                             {{data.description}}
+                             {{data?.description}}
                             </div>
                             <br>
                             <div class="button">
@@ -82,7 +83,7 @@
                 </mat-grid-tile >
                 <mat-grid-tile [colspan]="7">
                     <mat-card class="img_card">
-                        <img  mat-card-image src={{data.image}}>
+                        <img  mat-card-image src={{data?.image}}>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -133,60 +134,60 @@
     </div>
     <mat-grid-list class="event_grid" cols="12" rowHeight="20vh">
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card (click)="showEvent(eventDataTen[0].event_id)"  class="event_card">
-                <img  mat-card-image src="{{eventDataTen[0]?.image}}">
+            <mat-card (click)="showEvent(eventDataFive[0].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataFive[0]?.image}}">
                 
-                <mat-card-title>{{eventDataTen[0]?.title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[0]?.fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataFive[0]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataFive[0]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div class="cut-text">
-                        {{eventDataTen[0]?.description}}
+                        {{eventDataFive[0]?.description}}
                     </div>
                     <br>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card (click)="showEvent(eventDataTen[1].event_id)"  class="event_card">
-                <img  mat-card-image src="{{eventDataTen[1]?.image}}">
+            <mat-card (click)="showEvent(eventDataFive[1].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataFive[1]?.image}}">
                 
-                <mat-card-title>{{eventDataTen[1]?.title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[1]?.fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataFive[1]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataFive[1]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div class="cut-text">
-                        {{eventDataTen[1]?.description}}
+                        {{eventDataFive[1]?.description}}
                     </div>
                     <br>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="3" [rowspan]="4">
-            <mat-card (click)="showEvent(eventDataTen[2].event_id)"  class="event_card">
-                <img  mat-card-image src="{{eventDataTen[2]?.image}}">
+            <mat-card (click)="showEvent(eventDataFive[2].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataFive[2]?.image}}">
                 
-                <mat-card-title>{{eventDataTen[2]?.title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[2]?.fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataFive[2]?.title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataFive[2]?.fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div class="cut-text">
-                        {{eventDataTen[2]?.description}}
+                        {{eventDataFive[2]?.description}}
                     </div>
                     <br>
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
         <mat-grid-tile style="width: 50vh;" [colspan]="3" [rowspan]="4">
-            <mat-card (click)="showEvent(eventDataTen[3].event_id)"  class="event_card">
-                <img  mat-card-image src="{{eventDataTen[3]?.image}}">
+            <mat-card (click)="showEvent(eventDataFive[3].event_id)"  class="event_card">
+                <img  mat-card-image src="{{eventDataFive[3]?.image}}">
                 
-                <mat-card-title>{{eventDataTen[3].title}}</mat-card-title>
-                <mat-card-subtitle>{{eventDataTen[3].fecha}}</mat-card-subtitle>
+                <mat-card-title>{{eventDataFive[3].title}}</mat-card-title>
+                <mat-card-subtitle>{{eventDataFive[3].fecha}}</mat-card-subtitle>
                 <br>
                 <mat-card-content>
                     <div class="cut-text">
-                        {{eventDataTen[3].description}}
+                        {{eventDataFive[3].description}}
                     </div>
                     <br>
                 </mat-card-content>

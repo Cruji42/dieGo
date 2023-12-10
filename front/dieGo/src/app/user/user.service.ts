@@ -36,6 +36,15 @@ export class UserService {
     return this.http.get(this.url_events +'/public/total')
   }
 
+  getPublicTop5Event(){
+    return this.http.get(this.url_events + '/public/top5')
+  }
+
+  getTop5Event(token){
+    let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token})
+    return this.http.get(this.url_events + '/top5', {headers: headers })
+  }
+
   getTopEvent(token): Observable<any>{
     let  headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json', 'Authorization': token}  )
     return this.http.get(this.url_events +'/top10', { headers: headers})

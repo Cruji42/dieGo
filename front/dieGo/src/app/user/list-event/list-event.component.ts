@@ -33,6 +33,10 @@ export class ListEventComponent implements OnInit {
     }
     this.userService.getActiveEvents(this.token).subscribe((data: any)=>{
       this.events = data;
+      this.events.forEach((element, index)=>{
+        let date = element.start_date.toString();
+        this.events[index].hour= date.slice(11,16);
+      })
       console.log(data)
     })
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { CookieService } from 'ngx-cookie-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-list-favorite-event',
@@ -46,8 +47,13 @@ export class ListFavoriteEventComponent implements OnInit {
 
   FavoriteEventData(){
      this.userService.getFavoriteEvent(this.token, this.id_user).subscribe((data: any)=>{
+
       this.events = data;
-      console.log(data)
+      this.events.forEach((element, index)=>{
+        let date = element.start_date.toString();
+        this.events[index].hour= date.slice(11,16);
+      })
+      console.log(this.events)
     })
   }
 

@@ -35,6 +35,10 @@ export class ListOrganizerEventComponent implements OnInit {
   listOrganizerEvent(){
     this.organizerService.getEventOrganizer(this.token, this.id_user).subscribe((data: any) => {
       this.events = data;
+      this.events.forEach((element, index)=>{
+        let date = element.start_date.toString();
+        this.events[index].hour= date.slice(11,16);
+      })
       console.log(data)
     })
   }
