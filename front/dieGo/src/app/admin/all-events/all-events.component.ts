@@ -47,7 +47,7 @@ export class AllEventsComponent implements OnInit {
 
 
   copyText(id){
-    let url = location
+    let url = location.origin
     console.log(url);
     let val = url + '/dieGO/show-event/' + id;
     console.log(val);
